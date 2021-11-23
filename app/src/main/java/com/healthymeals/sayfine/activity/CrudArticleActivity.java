@@ -33,11 +33,9 @@ import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.adapter.crud.CrudArticleAdapter;
 import com.healthymeals.sayfine.model.Article;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class CrudArticleActivity extends AppCompatActivity {
     private TextInputLayout inputTitle;
@@ -46,8 +44,9 @@ public class CrudArticleActivity extends AppCompatActivity {
     private Button btnUpload;
     private RecyclerView recyclerView;
     private ProgressDialog progressDialog;
+
     private Uri thumbUrl;
-    private FirebaseFirestore db;
+    private FirebaseFirestore firebaseFirestore;
     private StorageReference storageReference;
     private CrudArticleAdapter adapter;
     private List<Article> list;
@@ -68,7 +67,7 @@ public class CrudArticleActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Mendaftarkan akun Anda...");
 
-        db= FirebaseFirestore.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
         list = new ArrayList<>();
         showData();
         adapter = new CrudArticleAdapter(this, this , list);
@@ -102,7 +101,7 @@ public class CrudArticleActivity extends AppCompatActivity {
             HashMap<String, Object> map = new HashMap<>();
             map.put("title", title);
             map.put("description", description);
-            db.collection("Articles").add(map)
+            firebaseFirestore.collection("Articles").add(map)
                     .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -116,7 +115,7 @@ public class CrudArticleActivity extends AppCompatActivity {
                                             @Override
                                             public void onSuccess(Uri uri) {
                                                 map.put("thumbUrl", uri.toString());
-                                                db.collection("Articles").document(task.getResult().getId()).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                firebaseFirestore.collection("Articles").document(task.getResult().getId()).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
 
@@ -155,7 +154,7 @@ public class CrudArticleActivity extends AppCompatActivity {
     }
 
     public void showData(){
-        db.collection("Articles").get()
+        firebaseFirestore.collection("Articles").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {

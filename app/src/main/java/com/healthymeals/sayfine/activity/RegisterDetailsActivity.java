@@ -3,18 +3,12 @@ package com.healthymeals.sayfine.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.ColorSpace;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.webkit.MimeTypeMap;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,14 +17,10 @@ import androidx.core.app.ActivityCompat;
 
 
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -38,7 +28,6 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.healthymeals.sayfine.R;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,14 +36,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class RegisterDetailsActivity extends AppCompatActivity {
 
     private static final int EXTERNAL_STORAGE_PERMISSION_CODE = 23;
-    private static final int PICK_IMAGE = 100;
 
     private Button btnStart;
     private CircleImageView imgProfile;
     private TextInputLayout inputName;
     private ProgressDialog progressDialog;
     private Uri imageUri;
-    private String userUid;
+    private String userId;
     private String name;
     private String phoneNumber;
 
@@ -74,7 +62,7 @@ public class RegisterDetailsActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        userUid = mAuth.getUid();
+        userId = mAuth.getUid();
 
         phoneNumber = getIntent().getStringExtra("phoneNumber");
         imageUri = null;
@@ -103,13 +91,13 @@ public class RegisterDetailsActivity extends AppCompatActivity {
                 }
                 else{
                     Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("id", userUid);
+                    userMap.put("id", userId);
                     userMap.put("name", name);
                     userMap.put("phoneNumber", phoneNumber);
                     userMap.put("profileUrl", null);
                     userMap.put("mainAddressId", null);
 
-                    firebaseFirestore.collection("Users").document(userUid).set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    firebaseFirestore.collection("Users").document(userId).set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Pendaftaran sukses!", Toast.LENGTH_LONG).show();
@@ -133,7 +121,7 @@ public class RegisterDetailsActivity extends AppCompatActivity {
     }
 
     private void registerWithProfileImage(Uri uri){
-        storageReference = FirebaseStorage.getInstance().getReference().child("profile/" + userUid + ".jpg");
+        storageReference = FirebaseStorage.getInstance().getReference().child("profiles/" + userId + ".jpg");
         storageReference.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -141,13 +129,13 @@ public class RegisterDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Map<String, Object> userMap = new HashMap<>();
-                        userMap.put("id", userUid);
+                        userMap.put("id", userId);
                         userMap.put("name", name);
                         userMap.put("phoneNumber", phoneNumber);
-                        userMap.put("profileUrl", "profile/" + userUid + ".jpg");
+                        userMap.put("profileUrl", uri.toString());
                         userMap.put("mainAddressId", null);
 
-                        firebaseFirestore.collection("Users").document(userUid).set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        firebaseFirestore.collection("Users").document(userId).set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 Toast.makeText(getApplicationContext(), "Pendaftaran sukses!", Toast.LENGTH_LONG).show();
@@ -160,7 +148,6 @@ public class RegisterDetailsActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(), "000000000000000000", Toast.LENGTH_LONG).show();
                             }
                         });
-
                         progressDialog.dismiss();
                         Toast.makeText(RegisterDetailsActivity.this, "Pendaftaran sukses!", Toast.LENGTH_SHORT).show();
                     }
@@ -175,7 +162,7 @@ public class RegisterDetailsActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 progressDialog.dismiss();
-                Toast.makeText(RegisterDetailsActivity.this, "Uploading Failed !!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterDetailsActivity.this, "Mengunggah foto profil gagal!", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -192,7 +179,7 @@ public class RegisterDetailsActivity extends AppCompatActivity {
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
         }
         else {
-            Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
+
         }
 
     }

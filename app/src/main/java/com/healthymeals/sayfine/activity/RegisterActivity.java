@@ -5,15 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -21,11 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.StorageReference;
 import com.hbb20.CountryCodePicker;
 import com.healthymeals.sayfine.R;
 
@@ -33,14 +25,11 @@ import java.util.concurrent.TimeUnit;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private static final String TAG = "DocSnippets";
     private CountryCodePicker inputCountryCode;
     private EditText inputPhoneNumber;
     private Button btnGoToLogin;
     private Button btnRegister;
     private FirebaseAuth mAuth;
-    private FirebaseFirestore firebaseFirestore;
-    private StorageReference storageReference;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks;
 
     @Override
@@ -48,10 +37,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() != null){
-            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
-            finish();
-        }
 
         btnRegister = findViewById(R.id.btnRegister);
         btnGoToLogin = findViewById(R.id.btnGoToLogin);
@@ -77,7 +62,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
-                Toast.makeText(getApplicationContext(), "Kode OTP telah terkirim!", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Kode OTP telah terkirim!", Toast.LENGTH_SHORT).show();
 
                 Intent otpIntent = new Intent(RegisterActivity.this , OtpActivity.class);
                 otpIntent.putExtra("auth" , s);
