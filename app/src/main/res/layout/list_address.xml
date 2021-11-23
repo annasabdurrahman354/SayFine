@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0dp"
+        app:cardMaxElevation="0dp"
+        app:strokeColor="@color/TertiaryDark"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/txtAddressName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Reza Rahardian"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txtAddressPhoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/poppins"
+                android:text="+6288123332323" />
+
+            <TextView
+                android:id="@+id/txtAddressFull"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Green Pramuka City Orchid, Tower 28 a16, rt.13/Rw.9, Rawa Sari, Cempaka Putih" />
+
+            <TextView
+                android:id="@+id/txtAddressExec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="KOTA JAKARTA PUSAT - CEMPAKA PUTIH, DKI JAKARTA " />
+
+            <TextView
+                android:id="@+id/txtAddressZipCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="ZIP Code 11051" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardAddressDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                app:cardBackgroundColor="@color/primary"
+                app:cardCornerRadius="6dp"
+                app:cardElevation="0dp"
+                app:cardMaxElevation="0dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="3dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="Utama"
+                    android:textAllCaps="true"
+                    android:textColor="@color/SecondaryLight" />
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

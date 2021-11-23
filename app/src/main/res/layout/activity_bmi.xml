@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9F9F9"
+    tools:context=".activity.BmiActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="#E1E1E1"
+        android:elevation="5dp"
+        android:fitsSystemWindows="true"
+        app:elevation="5dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="5dp"
+            android:padding="16dp"
+            app:contentInsetStart="0dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/roboto_medium"
+                    android:includeFontPadding="false"
+                    android:text="Menu"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/SecondaryDark"
+                    android:textSize="22sp" />
+
+                <ImageButton
+                    android:id="@+id/btnHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerInParent="true"
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:tint="@color/SecondaryDark"
+                    app:srcCompat="@drawable/ic_24_history"
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_below="@id/appbar"
+        android:alpha="0.2"
+        android:background="@drawable/view_shadow"
+        android:rotationX="180" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:text="BMI(kg/m²)"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:textColor="#7E000000"
+            android:textSize="14sp"
+            tools:text="Rentang dan kategori BMI berasal dari Wiki." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Berat badan :"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/inputBmiWeight"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_edittextbox"
+            android:ems="10"
+            android:fontFamily="@font/roboto"
+            android:inputType="number"
+            android:textSize="20sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Tinggi badan :"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/inputBmiHeight"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/rounded_edittextbox"
+            android:ems="10"
+            android:fontFamily="@font/roboto"
+            android:inputType="number"
+            android:textSize="20sp"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <Button
+            android:id="@+id/btnCalculateBmi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"
+            android:backgroundTint="@color/primary"
+            android:fontFamily="@font/roboto_regular"
+            android:letterSpacing="0.06"
+            android:text="Hitung"
+            android:textSize="18sp"
+            app:cornerRadius="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="Hasil :"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <com.anujkumarsharma.tooltipprogressbar.TooltipProgressBar
+            android:id="@+id/pgbBmi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:optionBottomTooltipColor="@color/accent"
+            app:optionBottomTooltipSteps="18"
+            app:optionBottomTooltipText="Obesitas"
+            app:optionLeftText="15"
+            app:optionProgressFillColor="#B41717"
+            app:optionProgressFillSteps="18"
+            app:optionProgressTotalSteps="100"
+            app:optionRightText="40"
+            app:optionTopTooltipColor="@color/primary"
+            app:optionTopTooltipText="BMI Anda: 18" />
+
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navHome"
+        android:icon="@drawable/ic_24_home"
+        android:title="Beranda" />
+    <item
+        android:id="@+id/navOrder"
+        android:icon="@drawable/ic_24_order"
+        android:title="Pesanan" />
+    <item
+        android:id="@+id/navAccount"
+        android:icon="@drawable/ic_24_account"
+        android:title="Akun" />
+    <item
+        android:id="@+id/navAbout"
+        android:icon="@drawable/ic_24_info"
+        android:title="Tentang Kita" />
+
+</menu>

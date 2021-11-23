@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1095445109243",
+    "project_id": "sayfine-1920",
+    "storage_bucket": "sayfine-1920.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095445109243:android:633a5f256152e1ff30135e",
+        "android_client_info": {
+          "package_name": "com.healthymeals.sayfine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095445109243-n92c6rtc1e39pcrfhoms86rjd24llals.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.healthymeals.sayfine",
+            "certificate_hash": "be207daf870e86adbeecb13b4437d8ede3623d2b"
+          }
+        },
+        {
+          "client_id": "1095445109243-o13rp7l7vamio95chhk782gcjov2m7re.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDp_k2wtn5aY3uHXtQRj3xPW3UBwol0NkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095445109243-o13rp7l7vamio95chhk782gcjov2m7re.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
