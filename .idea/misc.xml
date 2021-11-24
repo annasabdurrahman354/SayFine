@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/ic_30_menu.xml" value="0.2752895752895753" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_bmi.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_article.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_menu.xml" value="0.33" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_article.xml" value="0.25" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_menu.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_order_status.xml" value="0.33" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_packet.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Downloads/Mobdev/SayFine/app/src/main/res/drawable/divider_section_separator.xml" value="0.2351851851851852" />
         <entry key="..\:/Users/Annas/Downloads/Mobdev/SayFine/app/src/main/res/drawable/ic_24_account.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/Annas/Downloads/Mobdev/SayFine/app/src/main/res/drawable/ic_24_customer_service.xml" value="0.24166666666666667" />

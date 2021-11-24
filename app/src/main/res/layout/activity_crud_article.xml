@@ -79,6 +79,16 @@
                     android:orientation="vertical"
                     android:padding="10dp">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Masukkan Data Artikel"
+                        android:textAlignment="center"
+                        android:textColor="@color/SecondaryDark"
+                        android:textSize="20sp" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inputTitle"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -90,6 +100,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -105,30 +116,81 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
+                            android:layout_marginBottom="5dp"
                             android:inputType="textLongMessage|textMultiLine" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageButton
-                        android:id="@+id/imgArticleThumb"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/imgThumb"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp"
                         android:background="#00FFFFFF"
                         android:scaleType="fitCenter"
                         app:srcCompat="@drawable/pic_menu_thumbnail"
                         tools:ignore="SpeakableTextPresentCheck" />
 
                     <Button
-                        android:id="@+id/btnUpload"
+                        android:id="@+id/btnCreate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="5dp"
-                        android:backgroundTint="@color/black"
+                        android:backgroundTint="#00E676"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Perbarui"
-                        android:textSize="18sp"
+                        android:text="Tambah"
+                        android:textSize="16sp"
                         app:cornerRadius="10dp" />
+
+                    <LinearLayout
+                        android:id="@+id/lnrSelected"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/btnUpdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginRight="5dp"
+                            android:backgroundTint="#FF9100"
+                            android:enabled="true"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Perbarui"
+                            android:textSize="16sp"
+                            app:cornerRadius="10dp" />
+
+                        <Button
+                            android:id="@+id/btnDelete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginRight="5dp"
+                            android:backgroundTint="#F50057"
+                            android:enabled="true"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Hapus"
+                            android:textSize="16sp"
+                            app:cornerRadius="10dp" />
+
+                        <Button
+                            android:id="@+id/btnCancel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginRight="5dp"
+                            android:backgroundTint="@color/SecondaryDark"
+                            android:enabled="true"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Batal"
+                            android:textSize="16sp"
+                            app:cornerRadius="10dp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

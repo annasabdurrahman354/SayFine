@@ -7,6 +7,7 @@
     android:padding="10dp">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -23,7 +24,7 @@
             android:padding="8dp">
 
             <ImageView
-                android:id="@+id/imgMenuThumb"
+                android:id="@+id/imgThumb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/pic_menu_30" />
@@ -41,8 +42,9 @@
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Paket Makanan Sehat 30 Hari"
-                    android:textColor="@color/SecondaryDark" />
+                    android:text="Nasi Goreng"
+                    android:textColor="@color/SecondaryDark"
+                    android:textSize="16sp" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="wrap_content"

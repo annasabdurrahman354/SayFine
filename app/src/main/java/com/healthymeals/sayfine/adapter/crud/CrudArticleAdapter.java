@@ -1,35 +1,26 @@
 package com.healthymeals.sayfine.adapter.crud;
 
-import static java.security.AccessController.getContext;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.CrudArticleActivity;
 import com.healthymeals.sayfine.model.Article;
-
 import java.util.List;
-import com.healthymeals.sayfine.R;
 
 public class CrudArticleAdapter extends RecyclerView.Adapter<CrudArticleAdapter.MyViewHolder> {
     private CrudArticleActivity activity;
@@ -44,43 +35,24 @@ public class CrudArticleAdapter extends RecyclerView.Adapter<CrudArticleAdapter.
         this.mList = mList;
     }
 
-    public void updateData(int position){
-
-    }
-
-    public void deleteData(int position){
-        Article item = mList.get(position);
-        db.collection("Article").document(item.getId()).delete()
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()){
-                            notifyRemoved(position);
-                            Toast.makeText(activity, "Artikel telah terhapus!", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(activity, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
-    private void notifyRemoved(int position){
-        mList.remove(position);
-        notifyItemRemoved(position);
-        activity.getArticles();
-    }
-
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CrudArticleAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(activity).inflate(R.layout.list_article , parent , false);
-        return new MyViewHolder(v);
+        return new CrudArticleAdapter.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CrudArticleAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txtArticleTitle.setText(mList.get(position).getTitle());
+        holder.txtArticleDate.setText(mList.get(position).getTimestamp().toString());
         Glide.with(context).load(mList.get(position).getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgArticleThumb);
+        holder.cardArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.selectArticle(Integer.valueOf(position), mList.get(position));
+            }
+        });
     }
 
     @Override
@@ -89,14 +61,17 @@ public class CrudArticleAdapter extends RecyclerView.Adapter<CrudArticleAdapter.
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-
         TextView txtArticleTitle;
+        TextView txtArticleDate;
         ImageView imgArticleThumb;
+        MaterialCardView cardArticle;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
             txtArticleTitle = itemView.findViewById(R.id.txtArticleTitle);
-            imgArticleThumb = itemView.findViewById(R.id.imgArticleThumb);
+            txtArticleDate = itemView.findViewById(R.id.txtArticleDate);
+            imgArticleThumb = itemView.findViewById(R.id.imgThumb);
+            cardArticle = itemView.findViewById(R.id.cardArticle);
         }
     }
 }

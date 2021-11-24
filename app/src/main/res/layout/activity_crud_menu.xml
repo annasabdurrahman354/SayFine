@@ -77,27 +77,22 @@
                     android:orientation="vertical"
                     android:padding="10dp">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Masukkan Data Menu"
+                        android:textAlignment="center"
+                        android:textColor="@color/SecondaryDark"
+                        android:textSize="20sp" />
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/inputTitle"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="Judul"
-                        app:endIconMode="clear_text">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:singleLine="true" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputSubTitle"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="Sub Judul"
                         app:endIconMode="clear_text">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -123,11 +118,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputGofoodUrl"
+                        android:id="@+id/inputGoFoodUrl"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="GoFood Url"
+                        android:hint="Alamat GoFood"
                         app:endIconMode="clear_text">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -139,11 +134,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputShopeeUrl"
+                        android:id="@+id/inputGrabFoodUrl"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="ShopeeFood Url"
+                        android:hint="Alamat GrabFood"
                         app:endIconMode="clear_text">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -155,11 +150,11 @@
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputGrabUrl"
+                        android:id="@+id/inputShopeeFoodUrl"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="GrabFood Url"
+                        android:hint="Alamat ShopeeFood"
                         app:endIconMode="clear_text">
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -200,23 +195,30 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputSubscription"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <RadioGroup
+                        android:id="@+id/rdgType"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="Subscription"
-                        app:endIconMode="clear_text">
+                        android:layout_height="match_parent">
 
-                        <com.google.android.material.textfield.TextInputEditText
+                        <RadioButton
+                            android:id="@+id/rdbWeightGain"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:inputType="number" />
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Weight Gain"
+                            android:textColor="@color/SecondaryDark" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <RadioButton
+                            android:id="@+id/rdbWeightLoss"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Weight Loss"
+                            android:textColor="@color/SecondaryDark" />
+                    </RadioGroup>
 
                     <ImageButton
-                        android:id="@+id/imgArticleThumb"
+                        android:id="@+id/imgThumb"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#00FFFFFF"
@@ -225,16 +227,64 @@
                         tools:ignore="SpeakableTextPresentCheck" />
 
                     <Button
-                        android:id="@+id/btnUpload"
+                        android:id="@+id/btnCreate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="5dp"
-                        android:backgroundTint="@color/black"
+                        android:backgroundTint="#00E676"
                         android:fontFamily="@font/roboto_regular"
-                        android:text="Perbarui"
-                        android:textSize="18sp"
+                        android:text="Tambah"
+                        android:textSize="16sp"
                         app:cornerRadius="10dp" />
+
+                    <LinearLayout
+                        android:id="@+id/lnrSelected"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <Button
+                            android:id="@+id/btnUpdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginRight="5dp"
+                            android:backgroundTint="#FF9100"
+                            android:enabled="true"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Perbarui"
+                            android:textSize="16sp"
+                            app:cornerRadius="10dp" />
+
+                        <Button
+                            android:id="@+id/btnDelete"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginRight="5dp"
+                            android:backgroundTint="#F50057"
+                            android:enabled="true"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Hapus"
+                            android:textSize="16sp"
+                            app:cornerRadius="10dp" />
+
+                        <Button
+                            android:id="@+id/btnCancel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginRight="5dp"
+                            android:backgroundTint="@color/SecondaryDark"
+                            android:enabled="true"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Batal"
+                            android:textSize="16sp"
+                            app:cornerRadius="10dp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
