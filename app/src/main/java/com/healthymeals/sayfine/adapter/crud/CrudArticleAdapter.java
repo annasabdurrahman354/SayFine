@@ -67,7 +67,7 @@ public class CrudArticleAdapter extends RecyclerView.Adapter<CrudArticleAdapter.
     private void notifyRemoved(int position){
         mList.remove(position);
         notifyItemRemoved(position);
-        activity.showData();
+        activity.getArticles();
     }
 
     @NonNull

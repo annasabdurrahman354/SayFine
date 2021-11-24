@@ -91,7 +91,6 @@ public class RegisterDetailsActivity extends AppCompatActivity {
                 }
                 else{
                     Map<String, Object> userMap = new HashMap<>();
-                    userMap.put("id", userId);
                     userMap.put("name", name);
                     userMap.put("phoneNumber", phoneNumber);
                     userMap.put("profileUrl", null);
@@ -129,7 +128,6 @@ public class RegisterDetailsActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Map<String, Object> userMap = new HashMap<>();
-                        userMap.put("id", userId);
                         userMap.put("name", name);
                         userMap.put("phoneNumber", phoneNumber);
                         userMap.put("profileUrl", uri.toString());

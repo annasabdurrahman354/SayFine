@@ -1,5 +1,7 @@
 package com.healthymeals.sayfine.model;
 
+import androidx.annotation.Nullable;
+
 import com.google.firebase.firestore.DocumentId;
 
 public class User {
@@ -10,7 +12,7 @@ public class User {
     private String phoneNumber;
     private String mainAddressId;
 
-    public User(String id, String name, String profileUrl, String phoneNumber, String mainAddressId) {
+    public User(String id, String name, @Nullable String profileUrl, String phoneNumber, @Nullable String mainAddressId) {
         this.id = id;
         this.name = name;
         this.profileUrl = profileUrl;
