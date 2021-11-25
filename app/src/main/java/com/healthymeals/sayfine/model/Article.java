@@ -6,7 +6,6 @@ import com.google.firebase.firestore.DocumentId;
 import java.util.Date;
 
 public class Article {
-    @DocumentId
     private String id;
     private String title;
     private String description;

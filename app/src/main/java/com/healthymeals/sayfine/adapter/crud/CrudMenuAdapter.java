@@ -46,12 +46,12 @@ public class CrudMenuAdapter extends RecyclerView.Adapter<CrudMenuAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull CrudMenuAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txtMenuTitle.setText(mList.get(position).getTitle());
-        holder.txtMenuPrice.setText(mList.get(position).getPrice());
+        holder.txtMenuPrice.setText("Rp " + mList.get(position).getPrice().toString());
         Glide.with(context).load(mList.get(position).getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgMenuThumb);
         holder.cardMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*activity.selectMenu(Integer.valueOf(position), mList.get(position));*/
+                activity.selectMenu(Integer.valueOf(position), mList.get(position));
             }
         });
     }

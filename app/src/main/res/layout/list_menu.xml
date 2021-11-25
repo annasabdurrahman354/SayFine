@@ -67,7 +67,7 @@
                         android:layout_marginBottom="3dp"
                         android:fontFamily="@font/roboto_regular"
                         android:text="Rp 100.000"
-                        android:textAllCaps="true"
+                        android:textAllCaps="false"
                         android:textColor="@color/SecondaryLight" />
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>

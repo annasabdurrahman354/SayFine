@@ -5,7 +5,6 @@ import com.google.firebase.firestore.DocumentId;
 
 
 public class Order {
-    @DocumentId
     private String id;
     private String userId;
     private String menuId;

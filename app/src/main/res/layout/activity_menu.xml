@@ -82,7 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
-            android:text="Paket Makanan Sehat 30 Hari"
+            android:text="Salad sayur"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="20sp" />
@@ -108,20 +108,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/txtMenuSubTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="12sp"
-                    tools:text="Paket 30 Hari - Lunch &amp; Dinner" />
-
-                <TextView
                     android:id="@+id/txtMenuCalorie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:textSize="12sp"
-                    tools:text="Kalori per makanan (400 kal)" />
+                    android:textSize="13sp"
+                    tools:text="Kalori per makanan 400 kkal" />
             </LinearLayout>
 
             <LinearLayout
@@ -136,22 +128,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:textSize="12sp"
+                    android:textSize="13sp"
                     tools:text="Rp 100.000" />
 
-                <TextView
-                    android:id="@+id/txtMenuSubscription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
-                    android:textSize="12sp"
-                    tools:text="Berlaku untuk 30 hari" />
             </LinearLayout>
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/a"

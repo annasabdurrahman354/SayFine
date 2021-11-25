@@ -3,7 +3,6 @@ package com.healthymeals.sayfine.model;
 import com.google.firebase.firestore.DocumentId;
 
 public class Promo {
-    @DocumentId
     private String id;
     private String title;
     private String description;

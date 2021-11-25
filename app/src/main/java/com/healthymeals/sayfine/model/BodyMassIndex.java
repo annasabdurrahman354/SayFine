@@ -4,7 +4,6 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
 
 public class BodyMassIndex {
-    @DocumentId
     private String id;
     private String userId;
     private Float mass;

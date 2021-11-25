@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import com.google.firebase.firestore.DocumentId;
 
 public class User {
-    @DocumentId
     private String id;
     private String name;
     private String profileUrl;

@@ -3,26 +3,25 @@ package com.healthymeals.sayfine.model;
 import com.google.firebase.firestore.DocumentId;
 
 public class Menu {
-    @DocumentId
     private String id;
     private String title;
     private String description;
+    private String goFoodUrl;
+    private String grabFoodUrl;
+    private String shopeeFoodUrl;
     private String thumbUrl;
-    private String ShopeeFoodUrl;
-    private String GoFoodUrl;
-    private String GrabFoodUrl;
     private Integer price;
     private Integer calorie;
     private Boolean type;
 
-    public Menu(String id, String title, String description, String thumbUrl, String shopeeFoodUrl, String goFoodUrl, String grabFoodUrl, Integer price, Integer calorie, Boolean type) {
+    public Menu(String id, String title, String description, String goFoodUrl, String grabFoodUrl, String shopeeFoodUrl, String thumbUrl, Integer price, Integer calorie, Boolean type) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.goFoodUrl = goFoodUrl;
+        this.grabFoodUrl = grabFoodUrl;
+        this.shopeeFoodUrl = shopeeFoodUrl;
         this.thumbUrl = thumbUrl;
-        ShopeeFoodUrl = shopeeFoodUrl;
-        GoFoodUrl = goFoodUrl;
-        GrabFoodUrl = grabFoodUrl;
         this.price = price;
         this.calorie = calorie;
         this.type = type;
@@ -52,36 +51,36 @@ public class Menu {
         this.description = description;
     }
 
+    public String getGoFoodUrl() {
+        return goFoodUrl;
+    }
+
+    public void setGoFoodUrl(String goFoodUrl) {
+        this.goFoodUrl = goFoodUrl;
+    }
+
+    public String getGrabFoodUrl() {
+        return grabFoodUrl;
+    }
+
+    public void setGrabFoodUrl(String grabFoodUrl) {
+        this.grabFoodUrl = grabFoodUrl;
+    }
+
+    public String getShopeeFoodUrl() {
+        return shopeeFoodUrl;
+    }
+
+    public void setShopeeFoodUrl(String shopeeFoodUrl) {
+        this.shopeeFoodUrl = shopeeFoodUrl;
+    }
+
     public String getThumbUrl() {
         return thumbUrl;
     }
 
     public void setThumbUrl(String thumbUrl) {
         this.thumbUrl = thumbUrl;
-    }
-
-    public String getShopeeFoodUrl() {
-        return ShopeeFoodUrl;
-    }
-
-    public void setShopeeFoodUrl(String shopeeFoodUrl) {
-        ShopeeFoodUrl = shopeeFoodUrl;
-    }
-
-    public String getGoFoodUrl() {
-        return GoFoodUrl;
-    }
-
-    public void setGoFoodUrl(String goFoodUrl) {
-        GoFoodUrl = goFoodUrl;
-    }
-
-    public String getGrabFoodUrl() {
-        return GrabFoodUrl;
-    }
-
-    public void setGrabFoodUrl(String grabFoodUrl) {
-        GrabFoodUrl = grabFoodUrl;
     }
 
     public Integer getPrice() {

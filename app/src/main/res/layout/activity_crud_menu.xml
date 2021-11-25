@@ -98,6 +98,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:singleLine="true" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -113,6 +114,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
+                            android:layout_marginBottom="5dp"
                             android:inputType="textLongMessage|textMultiLine" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -128,6 +130,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:inputType="textUri"
                             android:singleLine="true" />
 
@@ -144,6 +147,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:inputType="textUri"
                             android:singleLine="true" />
 
@@ -160,6 +164,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:inputType="textUri"
                             android:singleLine="true" />
 
@@ -176,6 +181,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:inputType="number" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -191,6 +197,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:inputType="number" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -212,6 +219,7 @@
                             android:id="@+id/rdbWeightLoss"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:fontFamily="@font/roboto_regular"
                             android:text="Weight Loss"
                             android:textColor="@color/SecondaryDark" />
@@ -219,8 +227,9 @@
 
                     <ImageButton
                         android:id="@+id/imgThumb"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
                         android:background="#00FFFFFF"
                         android:scaleType="fitCenter"
                         app:srcCompat="@drawable/pic_menu_thumbnail"
@@ -300,6 +309,7 @@
                 android:rotationX="180" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"

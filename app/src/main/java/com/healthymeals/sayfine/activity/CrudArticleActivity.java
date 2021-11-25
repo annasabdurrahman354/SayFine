@@ -160,7 +160,7 @@ public class CrudArticleActivity extends AppCompatActivity {
 
     }
 
-    public void deselectArticle(){
+    private void deselectArticle(){
         clearInput();
         lnrSelected.setVisibility(View.GONE);
         btnCreate.setVisibility(View.VISIBLE);
@@ -178,7 +178,7 @@ public class CrudArticleActivity extends AppCompatActivity {
     private void addArticle(String title, String description, Uri thumbUrl){
         if (!title.isEmpty() && !description.isEmpty() && thumbUrl != null){
             String articleId = firebaseFirestore.collection("Articles").document().getId();
-            storageReference = FirebaseStorage.getInstance().getReference().child("article/" + articleId + ".jpg");
+            storageReference = FirebaseStorage.getInstance().getReference().child("articles/" + articleId + ".jpg");
             storageReference.putFile(thumbUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -222,7 +222,7 @@ public class CrudArticleActivity extends AppCompatActivity {
 
     private void updateArticle(Integer index, Article article, String title, String description, Uri thumbUrl){
         if (!title.isEmpty() && !description.isEmpty() && thumbUrl != null){
-            storageReference = FirebaseStorage.getInstance().getReference().child("article/" + article.getId() + ".jpg");
+            storageReference = FirebaseStorage.getInstance().getReference().child("articles/" + article.getId() + ".jpg");
             storageReference.putFile(thumbUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -302,7 +302,7 @@ public class CrudArticleActivity extends AppCompatActivity {
                 });
     }
 
-    public void getArticles() {
+    private void getArticles() {
         firebaseFirestore.collection("Articles")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override

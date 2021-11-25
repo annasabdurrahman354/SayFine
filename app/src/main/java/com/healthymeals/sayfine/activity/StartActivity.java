@@ -39,7 +39,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            startActivity(new Intent(StartActivity.this, CrudArticleActivity.class));
+                            startActivity(new Intent(StartActivity.this, CrudMenuActivity.class));
                             Toast.makeText(StartActivity.this, mAuth.getUid(), Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
