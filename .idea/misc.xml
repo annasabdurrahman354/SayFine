@@ -8,13 +8,27 @@
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_bmi.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_article.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_menu.xml" value="0.33" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_login_temp.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_main.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_menu.xml" value="0.33" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_menu_detail.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_menu_list.xml" value="0.33" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_register_temp.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_about.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_account.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_article.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_menu.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_menu_type.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_order.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_weight_gain.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_address.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_article.xml" value="0.25" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_bmi.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_menu.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_order_status.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_packet.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_promo.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Downloads/Mobdev/SayFine/app/src/main/res/drawable/divider_section_separator.xml" value="0.2351851851851852" />
         <entry key="..\:/Users/Annas/Downloads/Mobdev/SayFine/app/src/main/res/drawable/ic_24_account.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/Annas/Downloads/Mobdev/SayFine/app/src/main/res/drawable/ic_24_customer_service.xml" value="0.24166666666666667" />

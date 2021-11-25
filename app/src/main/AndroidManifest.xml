@@ -46,6 +46,9 @@
             android:name=".activity.MainActivity"
             android:exported="true" />
         <activity
+            android:name=".activity.MenuListActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.StartActivity"
             android:exported="true">
             <intent-filter>

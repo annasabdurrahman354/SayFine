@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="20dp"
             app:cardBackgroundColor="#5FB26F"
             app:cardCornerRadius="15dp"
@@ -133,7 +133,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:alpha="0.2"
             android:background="@drawable/view_shadow"
             android:rotationX="180" />
