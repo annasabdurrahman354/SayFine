@@ -14,11 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.card.MaterialCardView;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.healthymeals.sayfine.R;
-import com.healthymeals.sayfine.activity.CrudArticleActivity;
+import com.healthymeals.sayfine.activity.crud.CrudArticleActivity;
 import com.healthymeals.sayfine.model.Article;
 import java.util.List;
 

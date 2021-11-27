@@ -1,4 +1,4 @@
-package com.healthymeals.sayfine.activity;
+package com.healthymeals.sayfine.activity.crud;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

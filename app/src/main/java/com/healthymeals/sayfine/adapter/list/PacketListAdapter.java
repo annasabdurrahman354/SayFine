@@ -1,4 +1,4 @@
-package com.healthymeals.sayfine.adapter.crud;
+package com.healthymeals.sayfine.adapter.list;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -20,12 +20,12 @@ import com.healthymeals.sayfine.model.Packet;
 
 import java.util.List;
 
-public class CrudPacketAdapter extends RecyclerView.Adapter<CrudPacketAdapter.MyViewHolder> {
+public class PacketListAdapter extends RecyclerView.Adapter<PacketListAdapter.MyViewHolder> {
     private CrudPacketActivity activity;
     private Context context;
     private List<Packet> mList;
 
-    public CrudPacketAdapter(Context context, CrudPacketActivity activity, List<Packet> mList){
+    public PacketListAdapter(Context context, CrudPacketActivity activity, List<Packet> mList){
         this.context = context;
         this.activity = activity;
         this.mList = mList;
@@ -39,7 +39,7 @@ public class CrudPacketAdapter extends RecyclerView.Adapter<CrudPacketAdapter.My
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CrudPacketAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull PacketListAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txtPacketTitle.setText(mList.get(position).getTitle());
         holder.txtPacketAmount.setText(String.valueOf(mList.get(position).getMenuIdList().size()) + " Menu");
         Glide.with(context).load(mList.get(position).getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgPacketThumb);

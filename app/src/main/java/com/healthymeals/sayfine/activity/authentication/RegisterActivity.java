@@ -1,4 +1,4 @@
-package com.healthymeals.sayfine.activity;
+package com.healthymeals.sayfine.activity.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,6 +66,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 Intent otpIntent = new Intent(RegisterActivity.this , OtpActivity.class);
                 otpIntent.putExtra("auth" , s);
+                otpIntent.putExtra("type" , "0");
                 otpIntent.putExtra("phoneNumber" , inputCountryCode.getFullNumberWithPlus());
                 startActivity(otpIntent);
 

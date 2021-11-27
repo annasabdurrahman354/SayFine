@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/Annas/.gradle/caches/transforms-3/ec469b1b299769fdac21524b61df8c22/transformed/jetified-imagepicker-2.1/res/layout/dialog_choose_app.xml" value="0.146484375" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/ic_30_menu.xml" value="0.2752895752895753" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/pic_gofood1.xml" value="0.278515625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/pic_grabfood.xml" value="0.278515625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/prog.xml" value="0.278515625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article_detail.xml" value="0.26640625" />
@@ -22,6 +24,7 @@
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_register_temp.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_start.xml" value="0.2633204633204633" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/bottom_sheet_dialog_order_menu.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/bottom_sheet_menu.xml" value="0.4343293954134816" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/dialog_select_menu.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_about.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_account.xml" value="0.26640625" />

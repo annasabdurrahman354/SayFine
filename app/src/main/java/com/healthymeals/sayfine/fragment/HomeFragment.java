@@ -8,17 +8,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.ArticleListActivity;
 import com.healthymeals.sayfine.activity.BmiActivity;
-import com.healthymeals.sayfine.activity.CrudArticleActivity;
 import com.healthymeals.sayfine.activity.MenuListActivity;
-import com.healthymeals.sayfine.model.Article;
 
 public class HomeFragment extends Fragment {
     private Button btnMenu;
     private Button btnBmi;
     private Button btnArtikel;
+    private RecyclerView recyclerViewPacket;
+    private RecyclerView recyclerViewPromo;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -31,6 +33,8 @@ public class HomeFragment extends Fragment {
         btnMenu = view.findViewById(R.id.btnMenu);
         btnBmi = view.findViewById(R.id.btnBmi);
         btnArtikel = view.findViewById(R.id.btnArticle);
+        recyclerViewPacket = view.findViewById(R.id.recyclerViewPacket);
+        recyclerViewPromo = view.findViewById(R.id.recyclerViewPromo);
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override

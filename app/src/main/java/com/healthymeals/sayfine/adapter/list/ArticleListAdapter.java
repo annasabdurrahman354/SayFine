@@ -18,8 +18,6 @@ import com.google.android.material.card.MaterialCardView;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.ArticleDetailActivity;
 import com.healthymeals.sayfine.activity.ArticleListActivity;
-import com.healthymeals.sayfine.activity.CrudArticleActivity;
-import com.healthymeals.sayfine.activity.MenuDetailActivity;
 import com.healthymeals.sayfine.helper.IntentHelper;
 import com.healthymeals.sayfine.model.Article;
 

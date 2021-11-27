@@ -1,4 +1,4 @@
-package com.healthymeals.sayfine.activity;
+package com.healthymeals.sayfine.activity.authentication;
 
 import android.Manifest;
 import android.app.Activity;
@@ -27,6 +27,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.healthymeals.sayfine.R;
+import com.healthymeals.sayfine.activity.MainActivity;
 
 import java.util.HashMap;
 import java.util.Map;

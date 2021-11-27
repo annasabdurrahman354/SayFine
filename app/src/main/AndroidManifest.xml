@@ -22,13 +22,13 @@
         android:theme="@style/Theme.SayFine"
         tools:replace="android:theme">
         <activity
-            android:name=".activity.CrudArticleActivity"
+            android:name=".activity.crud.CrudArticleActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.CrudMenuActivity"
+            android:name=".activity.crud.CrudMenuActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.CrudPacketActivity"
+            android:name=".activity.crud.CrudPacketActivity"
             android:exported="true" />
         <activity
             android:name=".activity.ArticleListActivity"
@@ -43,16 +43,16 @@
             android:name=".activity.BmiHistoryActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.OtpActivity"
+            android:name=".activity.authentication.OtpActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.authentication.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".activity.authentication.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.RegisterDetailsActivity"
+            android:name=".activity.authentication.RegisterDetailsActivity"
             android:exported="true" />
         <activity
             android:name=".activity.MainActivity"

@@ -40,14 +40,15 @@
                     android:textSize="22sp" />
 
                 <ImageButton
-                    android:id="@+id/btnSetting"
+                    android:id="@+id/btnLogout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="5dp"
                     android:background="?selectableItemBackgroundBorderless"
                     android:scaleType="fitCenter"
                     android:tint="@color/SecondaryDark"
-                    app:srcCompat="@drawable/ic_24_settings"
+                    app:srcCompat="@drawable/ic_24_logout"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </RelativeLayout>
@@ -120,7 +121,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/roboto_medium"
                         android:gravity="center_vertical"
-                        android:text="Fauzy A"
+                        android:text="Nama Anda"
                         android:textColor="@color/primary_text"
                         android:textSize="18sp"
                         android:textStyle="normal" />

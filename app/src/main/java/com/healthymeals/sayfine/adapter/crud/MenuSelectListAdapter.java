@@ -15,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.material.card.MaterialCardView;
 import com.healthymeals.sayfine.R;
-import com.healthymeals.sayfine.activity.CrudMenuActivity;
-import com.healthymeals.sayfine.activity.CrudPacketActivity;
+import com.healthymeals.sayfine.activity.crud.CrudPacketActivity;
 import com.healthymeals.sayfine.model.Menu;
 
 import java.util.List;

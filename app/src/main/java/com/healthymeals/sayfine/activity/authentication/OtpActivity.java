@@ -1,4 +1,4 @@
-package com.healthymeals.sayfine.activity;
+package com.healthymeals.sayfine.activity.authentication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,18 +11,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.TaskExecutors;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.healthymeals.sayfine.R;
-
-import java.util.concurrent.TimeUnit;
+import com.healthymeals.sayfine.activity.MainActivity;
 
 import in.aabhasjindal.otptextview.OTPListener;
 import in.aabhasjindal.otptextview.OtpTextView;
@@ -30,6 +24,7 @@ import in.aabhasjindal.otptextview.OtpTextView;
 public class OtpActivity extends AppCompatActivity {
 
     private String OTP;
+    private String type;
     private String phoneNumber;
     private Button btnVerify;
     private OtpTextView inputOtp;
@@ -41,8 +36,8 @@ public class OtpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_otp);
         mAuth = FirebaseAuth.getInstance();
 
-        Intent intent = getIntent();
         OTP = getIntent().getStringExtra("auth");
+        type = getIntent().getStringExtra("auth");
         phoneNumber = getIntent().getStringExtra("phoneNumber");
 
         btnVerify = findViewById(R.id.btnVerify);
@@ -78,10 +73,17 @@ public class OtpActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    Intent detailsIntent = new Intent(OtpActivity.this , RegisterDetailsActivity.class);
-                    detailsIntent.putExtra("phoneNumber" , phoneNumber);
-                    startActivity(detailsIntent);
-                    finish();
+                    if (type == "1"){
+                        Intent loginIntent = new Intent(OtpActivity.this , MainActivity.class);
+                        startActivity(loginIntent);
+                        finish();
+                    }
+                    else{
+                        Intent detailsIntent = new Intent(OtpActivity.this , RegisterDetailsActivity.class);
+                        detailsIntent.putExtra("phoneNumber" , phoneNumber);
+                        startActivity(detailsIntent);
+                        finish();
+                    }
                 }else{
                     Toast.makeText(OtpActivity.this, "Verifikasi gagal. Masukkan kode OTP yang benar!", Toast.LENGTH_SHORT).show();
                 }

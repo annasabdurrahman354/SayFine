@@ -1,13 +1,11 @@
-package com.healthymeals.sayfine.activity;
+package com.healthymeals.sayfine.activity.crud;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -16,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,39 +25,30 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.healthymeals.sayfine.R;
-import com.healthymeals.sayfine.adapter.crud.CrudPacketAdapter;
-import com.healthymeals.sayfine.adapter.crud.MenuSelectListAdapter;
-import com.healthymeals.sayfine.model.Menu;
-import com.healthymeals.sayfine.model.Packet;
+import com.healthymeals.sayfine.adapter.crud.CrudArticleAdapter;
+import com.healthymeals.sayfine.model.Article;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CrudPacketActivity extends AppCompatActivity {
-    private AlertDialog.Builder dialog;
-    private LayoutInflater inflater;
-    private View dialogView;
-    private RecyclerView recyclerViewSelectMenu;
-
+public class CrudArticleActivity extends AppCompatActivity {
     private TextInputLayout inputTitle;
     private TextInputLayout inputDescription;
-    private TextInputLayout inputMenuList;
-    private TextInputEditText inputMenuListE;
     private ImageButton imgThumb;
-
+    private Timestamp timestamp;
     private LinearLayout lnrSelected;
     private Button btnCreate;
     private Button btnUpdate;
@@ -73,24 +61,20 @@ public class CrudPacketActivity extends AppCompatActivity {
     private Uri thumbUrl;
     private FirebaseFirestore firebaseFirestore;
     private StorageReference storageReference;
-    private CrudPacketAdapter adapter;
-    private MenuSelectListAdapter adapterSelectMenu;
+    private CrudArticleAdapter adapter;
 
-    private ArrayList<Packet> list = new ArrayList<>();
-    private ArrayList<Menu> menuList = new ArrayList<>();
-    private ArrayList<String> menuListChecked = new ArrayList<>();
+    private ArrayList<Article> list = new ArrayList<>();
 
-    public Packet selectedPacket;
-    public Integer selectedPacketIndex;
+    public Article selectedArticle;
+    public Integer selectedArticleIndex;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crud_packet);
+        setContentView(R.layout.activity_crud_article);
         inputTitle = findViewById(R.id.inputTitle);
         inputDescription = findViewById(R.id.inputDescription);
-        inputMenuList = findViewById(R.id.inputMenuList);
-        inputMenuListE = findViewById(R.id.test);
         imgThumb = findViewById(R.id.imgThumb);
 
         lnrSelected = findViewById(R.id.lnrSelected);
@@ -104,40 +88,31 @@ public class CrudPacketActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Mengunggah data packet...");
+        progressDialog.setMessage("Mengunggah data artikel...");
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        getMenus();
-        getPackets();
-        adapter = new CrudPacketAdapter(this, this , list);
+        getArticles();
+        adapter = new CrudArticleAdapter(this, this , list);
         recyclerView.setAdapter(adapter);
 
         imgThumb.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                ImagePicker.with(CrudPacketActivity.this)
-                        .crop(4f, 2f)
+                ImagePicker.with(CrudArticleActivity.this)
+                        .crop(3f, 2f)
                         .compress(1024)
                         .maxResultSize(1080, 1080)
                         .start();
             }
         });
 
-        inputMenuListE.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialogSelectMenu();
-            }
-        });
-
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addPacket(
+                addArticle(
                         inputTitle.getEditText().getText().toString(),
                         inputDescription.getEditText().getText().toString(),
-                        thumbUrl,
-                        menuListChecked
+                        thumbUrl
                 );
             }
         });
@@ -145,13 +120,12 @@ public class CrudPacketActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updatePacket(
-                        selectedPacketIndex,
-                        selectedPacket,
+                updateArticle(
+                        selectedArticleIndex,
+                        selectedArticle,
                         inputTitle.getEditText().getText().toString(),
                         inputDescription.getEditText().getText().toString(),
-                        thumbUrl,
-                        menuListChecked
+                        thumbUrl
                 );
             }
         });
@@ -159,9 +133,9 @@ public class CrudPacketActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deletePacket(
-                        selectedPacketIndex,
-                        selectedPacket
+                deleteArticle(
+                        selectedArticleIndex,
+                        selectedArticle
                 );
             }
         });
@@ -169,61 +143,55 @@ public class CrudPacketActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deselectPacket();
+                deselectArticle();
             }
         });
     }
 
-    public void selectPacket(Integer index, Packet packet){
-        selectedPacketIndex = index;
-        selectedPacket = packet;
-        menuListChecked = packet.getMenuIdList();
-        String text = "";
-        for(int i = 0; i < menuList.size(); i++){
-            if(menuListChecked.contains(menuList.get(i).getId()))
-                text = text + " " + menuList.get(i).getTitle() + ",";
-        }
-        inputMenuList.getEditText().setText(text);
-        inputTitle.getEditText().setText(packet.getTitle());
-        inputDescription.getEditText().setText(packet.getDescription());
-        Glide.with(this).load(packet.getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgThumb);
+    public void selectArticle(Integer index, Article article){
+
+        selectedArticleIndex = index;
+        selectedArticle = article;
+        inputTitle.getEditText().setText(article.getTitle());
+        inputDescription.getEditText().setText(article.getDescription());
+        Glide.with(this).load(article.getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgThumb);
         lnrSelected.setVisibility(View.VISIBLE);
         btnCreate.setVisibility(View.GONE);
+
     }
 
-    private void deselectPacket(){
+    private void deselectArticle(){
         clearInput();
         lnrSelected.setVisibility(View.GONE);
         btnCreate.setVisibility(View.VISIBLE);
     }
 
     private void clearInput(){
-        selectedPacketIndex = null;
-        selectedPacket = null;
+        selectedArticleIndex = null;
+        selectedArticle = null;
         inputTitle.getEditText().setText(null);
         inputDescription.getEditText().setText(null);
-        inputMenuList.getEditText().setText(null);
-        menuListChecked.clear();
         imgThumb.setImageResource(R.drawable.pic_thumbnail);
         thumbUrl = null;
     }
 
-    private void addPacket(String title, String description, Uri thumbUrl, ArrayList<String> menuListId){
+    private void addArticle(String title, String description, Uri thumbUrl){
         if (!title.isEmpty() && !description.isEmpty() && thumbUrl != null){
-            String packetId = firebaseFirestore.collection("Packets").document().getId();
-            storageReference = FirebaseStorage.getInstance().getReference().child("packets/" + packetId + ".jpg");
+            String articleId = firebaseFirestore.collection("Articles").document().getId();
+            storageReference = FirebaseStorage.getInstance().getReference().child("articles/" + articleId + ".jpg");
             storageReference.putFile(thumbUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+                            Timestamp timestamp = Timestamp.now();
                             HashMap<String, Object> map = new HashMap<>();
                             map.put("title", title);
                             map.put("description", description);
                             map.put("thumbUrl", uri.toString());
-                            map.put("menuIdList", menuListId);
-                            firebaseFirestore.collection("Packets").document(packetId).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            map.put("timestamp", timestamp);
+                            firebaseFirestore.collection("Articles").document(articleId).set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
@@ -245,34 +213,35 @@ public class CrudPacketActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(CrudPacketActivity.this, "Gagal mengunggah gambar!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrudArticleActivity.this, "Gagal mengunggah gambar!", Toast.LENGTH_SHORT).show();
                 }
             });
         } else Toast.makeText(this, "Isi semua masukkan terlebih dahulu!", Toast.LENGTH_SHORT).show();
     }
 
-    private void updatePacket(Integer index, Packet packet, String title, String description, Uri thumbUrl, ArrayList<String> menuIdList){
+    private void updateArticle(Integer index, Article article, String title, String description, Uri thumbUrl){
         if (!title.isEmpty() && !description.isEmpty() && thumbUrl != null){
-            storageReference = FirebaseStorage.getInstance().getReference().child("packets/" + packet.getId() + ".jpg");
+            storageReference = FirebaseStorage.getInstance().getReference().child("articles/" + article.getId() + ".jpg");
             storageReference.putFile(thumbUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
+                            Timestamp timestamp = Timestamp.now();
                             HashMap<String, Object> map = new HashMap<>();
                             map.put("title", title);
                             map.put("description", description);
                             map.put("thumbUrl", uri.toString());
-                            map.put("menuIdList", menuIdList);
-                            firebaseFirestore.collection("Packets").document(packet.getId()).update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            map.put("timestamp", timestamp);
+                            firebaseFirestore.collection("Articles").document(article.getId()).update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-                                        Packet packetNew = new Packet(packet.getId(), title, description, uri.toString(), menuIdList);
-                                        list.set(index.intValue(), packetNew);
+                                        Article articleNew = new Article(article.getId(), title, description, uri.toString(), timestamp);
+                                        list.set(index.intValue(), articleNew);
                                         adapter.notifyDataSetChanged();
-                                        deselectPacket();
+                                        deselectArticle();
                                         progressDialog.dismiss();
                                     }
                                 }
@@ -289,23 +258,24 @@ public class CrudPacketActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     progressDialog.dismiss();
-                    Toast.makeText(CrudPacketActivity.this, "Gagal mengunggah gambar!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CrudArticleActivity.this, "Gagal mengunggah gambar!", Toast.LENGTH_SHORT).show();
                 }
             });
         }
         else if(!title.isEmpty() && !description.isEmpty() && thumbUrl == null) {
+            Timestamp timestamp = Timestamp.now();
             HashMap<String, Object> map = new HashMap<>();
             map.put("title", title);
             map.put("description", description);
-            map.put("menuIdList", menuIdList);
-            firebaseFirestore.collection("Packets").document(packet.getId()).update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            map.put("timestamp", timestamp);
+            firebaseFirestore.collection("Articles").document(article.getId()).update(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()){
-                        Packet packetNew = new Packet(packet.getId(), title, description, packet.getThumbUrl(), menuIdList);
-                        list.set(index.intValue(), packetNew);
+                        Article articleNew = new Article(article.getId(), title, description, article.getThumbUrl(), timestamp);
+                        list.set(index.intValue(), articleNew);
                         adapter.notifyDataSetChanged();
-                        deselectPacket();
+                        deselectArticle();
                         progressDialog.dismiss();
                     }
                 }
@@ -314,25 +284,25 @@ public class CrudPacketActivity extends AppCompatActivity {
         else Toast.makeText(this, "Isi semua masukkan terlebih dahulu!", Toast.LENGTH_SHORT).show();
     }
 
-    private void deletePacket(Integer index, Packet packet){
-        firebaseFirestore.collection("Packets").document(packet.getId()).delete()
+    public void deleteArticle(Integer index, Article article){
+        firebaseFirestore.collection("Articles").document(article.getId()).delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
                             list.remove(index.intValue());
                             adapter.notifyDataSetChanged();
-                            deselectPacket();
-                            Toast.makeText(CrudPacketActivity.this, "Paket telah terhapus!", Toast.LENGTH_SHORT).show();
+                            deselectArticle();
+                            Toast.makeText(CrudArticleActivity.this, "Artikel telah terhapus!", Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(CrudPacketActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CrudArticleActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
     }
 
-    private void getPackets() {
-        firebaseFirestore.collection("Packets")
+    private void getArticles() {
+        firebaseFirestore.collection("Articles")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
@@ -340,17 +310,17 @@ public class CrudPacketActivity extends AppCompatActivity {
                             if (progressDialog.isShowing()){
                                 progressDialog.dismiss();
                             }
-                            Toast.makeText(CrudPacketActivity.this, "Gagal mendapatkan data paket!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CrudArticleActivity.this, "Gagal mendapatkan data artikel!", Toast.LENGTH_SHORT).show();
                             Log.e("Firestore error",error.getMessage());
                             return;
                         }
 
                         for (DocumentChange dc : value.getDocumentChanges()){
-                            Packet packet;
-                            packet = new Packet(dc.getDocument().getId(),dc.getDocument().getString("title"), dc.getDocument().getString("description"), dc.getDocument().getString("thumbUrl"), (ArrayList<String>) dc.getDocument().get("menuIdList"));
+                            Article article;
+                            article = new Article(dc.getDocument().getId(), dc.getDocument().getString("title"), dc.getDocument().getString("description"), dc.getDocument().getString("thumbUrl"), dc.getDocument().getTimestamp("timestamp"));
                             switch (dc.getType()) {
                                 case ADDED:
-                                    list.add(packet);
+                                    list.add(article);
                                     break;
                                 case MODIFIED:
 
@@ -367,63 +337,6 @@ public class CrudPacketActivity extends AppCompatActivity {
                 });
     }
 
-    private void getMenus() {
-        firebaseFirestore.collection("Menus").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("Firestore error", document.getId() + " => " + document.getData());
-                                Menu menu = new Menu(document.getId(), document.getString("title"), document.getString("description"), null, null, null, document.getString("thumbUrl"),((Number) document.getDouble("price")).intValue(), ((Number) document.getDouble("calorie")).intValue(),document.getBoolean("type"));
-                                menuList.add(menu);
-                            }
-                        } else {
-                            Toast.makeText(CrudPacketActivity.this, "Gagal mendapatkan data menu!", Toast.LENGTH_SHORT).show();
-                            Log.e("Firestore error", task.getException().toString());
-                            return;
-                        }
-                    }
-                });
-    }
-
-    private void dialogSelectMenu() {
-        dialog = new AlertDialog.Builder(CrudPacketActivity.this);
-        inflater = getLayoutInflater();
-        dialogView = inflater.inflate(R.layout.dialog_select_menu, null);
-        dialog.setView(dialogView);
-        dialog.setCancelable(true);
-        dialog.setTitle("Pilih Menu");
-
-        recyclerViewSelectMenu = dialogView.findViewById(R.id.recyclerViewSelectMenu);
-        recyclerViewSelectMenu.setHasFixedSize(true);
-        recyclerViewSelectMenu.setLayoutManager(new LinearLayoutManager(this));
-        adapterSelectMenu = new MenuSelectListAdapter(CrudPacketActivity.this, this , menuList, menuListChecked);
-        recyclerViewSelectMenu.setAdapter(adapterSelectMenu);
-
-        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String text = "";
-                for(int i = 0; i < menuList.size(); i++){
-                    if(menuListChecked.contains(menuList.get(i).getId()))
-                    text = text + " " + menuList.get(i).getTitle() + ",";
-                }
-                inputMenuList.getEditText().setText(text);
-                dialog.dismiss();
-            }
-
-        });
-
-        dialog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        dialog.show();
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
@@ -432,11 +345,9 @@ public class CrudPacketActivity extends AppCompatActivity {
             thumbUrl = data.getData();
             imgThumb.setImageURI(thumbUrl);
         }
-
         else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();
         }
-
         else {
             Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
         }

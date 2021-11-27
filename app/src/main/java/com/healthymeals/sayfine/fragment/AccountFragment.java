@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,9 +23,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.BmiActivity;
-import com.healthymeals.sayfine.activity.CrudArticleActivity;
-import com.healthymeals.sayfine.activity.CrudMenuActivity;
-import com.healthymeals.sayfine.activity.CrudPacketActivity;
+import com.healthymeals.sayfine.activity.crud.CrudArticleActivity;
+import com.healthymeals.sayfine.activity.crud.CrudMenuActivity;
+import com.healthymeals.sayfine.activity.crud.CrudPacketActivity;
+import com.healthymeals.sayfine.activity.StartActivity;
 
 public class AccountFragment extends Fragment {
     private CardView cardAddress;
@@ -35,6 +37,7 @@ public class AccountFragment extends Fragment {
     private CardView cardDBPacket;
     private CardView cardDBPromo;
     private ImageView imgProfile;
+    private ImageButton btnLogout;
     private TextView txtName;
 
     private FirebaseAuth mAuth;
@@ -103,6 +106,16 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CrudPacketActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth.signOut();
+                Intent intent = new Intent(getActivity(), StartActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
