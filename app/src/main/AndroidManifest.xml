@@ -31,6 +31,12 @@
             android:name=".activity.CrudPacketActivity"
             android:exported="true" />
         <activity
+            android:name=".activity.ArticleListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ArticleDetailActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.BmiActivity"
             android:exported="true" />
         <activity

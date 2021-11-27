@@ -37,7 +37,7 @@ public class MenuDetailActivity extends AppCompatActivity {
 
         Glide.with(this).load(clickedMenu.getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgThumb);
         txtMenuTitle.setText(clickedMenu.getTitle());
-        txtMenuCalorie.setText("Kalori per sajian " + clickedMenu.getCalorie().toString() + " kkal");
+        txtMenuCalorie.setText("Kalori " + clickedMenu.getCalorie().toString() + " kkal");
         txtMenuPrice.setText("Rp " + clickedMenu.getPrice().toString());
         txtMenuDescription.setText(clickedMenu.getDescription());
 

@@ -1,29 +1,19 @@
-package com.healthymeals.sayfine.adapter.crud;
+package com.healthymeals.sayfine.adapter.list;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.material.card.MaterialCardView;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.BmiHistoryActivity;
-import com.healthymeals.sayfine.activity.CrudArticleActivity;
-import com.healthymeals.sayfine.activity.MenuDetailActivity;
-import com.healthymeals.sayfine.helper.IntentHelper;
 import com.healthymeals.sayfine.model.BodyMassIndex;
-import com.healthymeals.sayfine.model.Menu;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BmiListAdapter extends RecyclerView.Adapter<BmiListAdapter.RecyclerViewHolder> {

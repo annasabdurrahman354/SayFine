@@ -7,6 +7,8 @@
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/ic_30_menu.xml" value="0.2752895752895753" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/prog.xml" value="0.278515625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article_detail.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article_list.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_bmi.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_bmi_history.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_article.xml" value="0.26640625" />
@@ -19,6 +21,7 @@
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_menu_list.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_register_temp.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_start.xml" value="0.2633204633204633" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/bottom_sheet_dialog_order_menu.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/dialog_select_menu.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_about.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_account.xml" value="0.26640625" />

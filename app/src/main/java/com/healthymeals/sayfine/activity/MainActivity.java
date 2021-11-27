@@ -16,6 +16,10 @@ import com.healthymeals.sayfine.fragment.OrderFragment;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
     BottomNavigationView bottomNavBar;
+    private HomeFragment homeFragment = new HomeFragment();
+    private OrderFragment orderFragment = new OrderFragment();
+    private AccountFragment accountFragment = new AccountFragment();
+    private AboutFragment aboutFragment = new AboutFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +36,16 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Fragment fragment = null;
         switch (item.getItemId()){
             case R.id.navHome:
-                fragment = new HomeFragment();
+                fragment = homeFragment;
                 break;
             case R.id.navOrder:
-                fragment = new OrderFragment();
+                fragment = orderFragment;
                 break;
             case R.id.navAccount:
-                fragment = new AccountFragment();
+                fragment = accountFragment;
                 break;
             case R.id.navAbout:
-                fragment = new AboutFragment();
+                fragment = aboutFragment;
                 break;
         }
         return loadFragment(fragment);

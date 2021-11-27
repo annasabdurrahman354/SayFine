@@ -45,18 +45,6 @@
                     android:textColor="@color/SecondaryDark"
                     android:textSize="22sp" />
 
-                <ImageButton
-                    android:id="@+id/btnHistory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:tint="@color/SecondaryDark"
-                    app:srcCompat="@drawable/ic_24_history"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
-                    tools:visibility="gone" />
-
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>

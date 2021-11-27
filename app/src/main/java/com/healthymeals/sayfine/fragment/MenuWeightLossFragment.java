@@ -18,10 +18,8 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.storage.StorageReference;
 import com.healthymeals.sayfine.R;
-import com.healthymeals.sayfine.activity.CrudMenuActivity;
-import com.healthymeals.sayfine.adapter.crud.MenuListAdapter;
+import com.healthymeals.sayfine.adapter.list.MenuListAdapter;
 import com.healthymeals.sayfine.model.Menu;
 
 import java.util.ArrayList;

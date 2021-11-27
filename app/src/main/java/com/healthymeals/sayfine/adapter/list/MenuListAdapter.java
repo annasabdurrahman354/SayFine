@@ -1,4 +1,4 @@
-package com.healthymeals.sayfine.adapter.crud;
+package com.healthymeals.sayfine.adapter.list;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

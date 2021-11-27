@@ -40,18 +40,6 @@
                     android:textColor="@color/SecondaryDark"
                     android:textSize="22sp" />
 
-                <ImageButton
-                    android:id="@+id/btnFavorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:tint="@color/SecondaryDark"
-                    app:srcCompat="@drawable/ic_24_favorite"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
-                    tools:visibility="gone" />
-
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
@@ -64,12 +52,10 @@
         android:rotationX="180" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="-5dp"
-        android:layout_marginRight="20dp"
-        android:paddingTop="20dp" />
+        android:layout_marginTop="-5dp" />
 
 
 </LinearLayout>
