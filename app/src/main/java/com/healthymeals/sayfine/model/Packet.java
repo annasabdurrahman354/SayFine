@@ -1,7 +1,5 @@
 package com.healthymeals.sayfine.model;
 
-import com.google.firebase.firestore.DocumentId;
-
 import java.util.ArrayList;
 
 public class Packet {
@@ -9,14 +7,14 @@ public class Packet {
     private String title;
     private String description;
     private String thumbUrl;
-    private ArrayList<String> menuIDs;
+    private ArrayList<String> menuIdList;
 
-    public Packet(String id, String title, String description, String thumbUrl, ArrayList<String> menuIDs) {
+    public Packet(String id, String title, String description, String thumbUrl, ArrayList<String> menuIdList) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.thumbUrl = thumbUrl;
-        this.menuIDs = menuIDs;
+        this.menuIdList = menuIdList;
     }
 
     public String getId() {
@@ -51,11 +49,11 @@ public class Packet {
         this.thumbUrl = thumbUrl;
     }
 
-    public ArrayList<String> getMenuIDs() {
-        return menuIDs;
+    public ArrayList<String> getMenuIdList() {
+        return menuIdList;
     }
 
-    public void setMenuIDs(ArrayList<String> menuIDs) {
-        this.menuIDs = menuIDs;
+    public void setMenuIdList(ArrayList<String> menuIdList) {
+        this.menuIdList = menuIdList;
     }
 }

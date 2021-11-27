@@ -3,17 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Annas/.gradle/caches/transforms-3/ec469b1b299769fdac21524b61df8c22/transformed/jetified-imagepicker-2.1/res/layout/dialog_choose_app.xml" value="0.146484375" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/ic_30_menu.xml" value="0.2752895752895753" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/prog.xml" value="0.278515625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_bmi.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_bmi_history.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_article.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_menu.xml" value="0.33" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_packet.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_login_temp.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_main.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_menu.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_menu_detail.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_menu_list.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_register_temp.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_start.xml" value="0.2633204633204633" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/dialog_select_menu.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_about.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_account.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_article.xml" value="0.26640625" />
@@ -24,11 +30,13 @@
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/fragment_weight_gain.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_address.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_article.xml" value="0.25" />
-        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_bmi.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_bmi.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_menu.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_menu_select.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_order_status.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_packet.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_promo.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/temp2.xml" value="0.146484375" />
         <entry key="..\:/Users/Annas/Downloads/Mobdev/SayFine/app/src/main/res/drawable/divider_section_separator.xml" value="0.2351851851851852" />
         <entry key="..\:/Users/Annas/Downloads/Mobdev/SayFine/app/src/main/res/drawable/ic_24_account.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/Annas/Downloads/Mobdev/SayFine/app/src/main/res/drawable/ic_24_customer_service.xml" value="0.24166666666666667" />

@@ -26,8 +26,6 @@ public class CrudArticleAdapter extends RecyclerView.Adapter<CrudArticleAdapter.
     private CrudArticleActivity activity;
     private Context context;
     private List<Article> mList;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
     public CrudArticleAdapter(Context context, CrudArticleActivity activity, List<Article> mList){
         this.context = context;
@@ -45,7 +43,7 @@ public class CrudArticleAdapter extends RecyclerView.Adapter<CrudArticleAdapter.
     @Override
     public void onBindViewHolder(@NonNull CrudArticleAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.txtArticleTitle.setText(mList.get(position).getTitle());
-        holder.txtArticleDate.setText(mList.get(position).getTimestamp().toString());
+        holder.txtArticleDate.setText(mList.get(position).getTimestamp().toDate().toString());
         Glide.with(context).load(mList.get(position).getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgArticleThumb);
         holder.cardArticle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +68,7 @@ public class CrudArticleAdapter extends RecyclerView.Adapter<CrudArticleAdapter.
 
             txtArticleTitle = itemView.findViewById(R.id.txtArticleTitle);
             txtArticleDate = itemView.findViewById(R.id.txtArticleDate);
-            imgArticleThumb = itemView.findViewById(R.id.imgThumb);
+            imgArticleThumb = itemView.findViewById(R.id.imgArticleThumb);
             cardArticle = itemView.findViewById(R.id.cardArticle);
         }
     }

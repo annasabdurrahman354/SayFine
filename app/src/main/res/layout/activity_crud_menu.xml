@@ -232,7 +232,7 @@
                         android:layout_marginBottom="5dp"
                         android:background="#00FFFFFF"
                         android:scaleType="fitCenter"
-                        app:srcCompat="@drawable/pic_menu_thumbnail"
+                        app:srcCompat="@drawable/pic_thumbnail"
                         tools:ignore="SpeakableTextPresentCheck" />
 
                     <Button

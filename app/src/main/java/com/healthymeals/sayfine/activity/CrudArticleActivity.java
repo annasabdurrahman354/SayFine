@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
@@ -47,7 +48,7 @@ public class CrudArticleActivity extends AppCompatActivity {
     private TextInputLayout inputTitle;
     private TextInputLayout inputDescription;
     private ImageButton imgThumb;
-
+    private Timestamp timestamp;
     private LinearLayout lnrSelected;
     private Button btnCreate;
     private Button btnUpdate;
@@ -62,7 +63,7 @@ public class CrudArticleActivity extends AppCompatActivity {
     private StorageReference storageReference;
     private CrudArticleAdapter adapter;
 
-    private ArrayList<Article> list;
+    private ArrayList<Article> list = new ArrayList<>();
 
     public Article selectedArticle;
     public Integer selectedArticleIndex;
@@ -90,7 +91,6 @@ public class CrudArticleActivity extends AppCompatActivity {
         progressDialog.setMessage("Mengunggah data artikel...");
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        list = new ArrayList<>();
         getArticles();
         adapter = new CrudArticleAdapter(this, this , list);
         recyclerView.setAdapter(adapter);
@@ -171,7 +171,7 @@ public class CrudArticleActivity extends AppCompatActivity {
         selectedArticle = null;
         inputTitle.getEditText().setText(null);
         inputDescription.getEditText().setText(null);
-        imgThumb.setImageResource(R.drawable.pic_menu_thumbnail);
+        imgThumb.setImageResource(R.drawable.pic_thumbnail);
         thumbUrl = null;
     }
 
@@ -195,7 +195,6 @@ public class CrudArticleActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()){
-                                        Article article = new Article(articleId, title, description, uri.toString(), timestamp);
                                         adapter.notifyDataSetChanged();
                                         clearInput();
                                         progressDialog.dismiss();

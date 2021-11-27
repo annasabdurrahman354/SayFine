@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
         android:clickable="true"
+        android:scaleType="fitXY"
         app:srcCompat="@drawable/pic_promo"
         tools:ignore="SpeakableTextPresentCheck" />
 </LinearLayout>

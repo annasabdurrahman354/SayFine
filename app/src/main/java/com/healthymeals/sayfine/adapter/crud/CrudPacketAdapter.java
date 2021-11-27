@@ -17,18 +17,20 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.CrudMenuActivity;
+import com.healthymeals.sayfine.activity.CrudPacketActivity;
+import com.healthymeals.sayfine.model.Menu;
+import com.healthymeals.sayfine.model.Packet;
 
 import java.util.List;
-import com.healthymeals.sayfine.R;
-import com.healthymeals.sayfine.model.Menu;
 
-public class CrudMenuAdapter extends RecyclerView.Adapter<CrudMenuAdapter.MyViewHolder> {
-    private CrudMenuActivity activity;
+public class CrudPacketAdapter extends RecyclerView.Adapter<CrudPacketAdapter.MyViewHolder> {
+    private CrudPacketActivity activity;
     private Context context;
-    private List<Menu> mList;
+    private List<Packet> mList;
 
-    public CrudMenuAdapter(Context context, CrudMenuActivity activity, List<Menu> mList){
+    public CrudPacketAdapter(Context context, CrudPacketActivity activity, List<Packet> mList){
         this.context = context;
         this.activity = activity;
         this.mList = mList;
@@ -42,14 +44,14 @@ public class CrudMenuAdapter extends RecyclerView.Adapter<CrudMenuAdapter.MyView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CrudMenuAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        holder.txtMenuTitle.setText(mList.get(position).getTitle());
-        holder.txtMenuPrice.setText("Rp " + mList.get(position).getPrice().toString());
-        Glide.with(context).load(mList.get(position).getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgMenuThumb);
-        holder.cardMenu.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(@NonNull CrudPacketAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        holder.txtPacketTitle.setText(mList.get(position).getTitle());
+        holder.txtPacketAmount.setText(String.valueOf(mList.get(position).getMenuIdList().size()) + " Menu");
+        Glide.with(context).load(mList.get(position).getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgPacketThumb);
+        holder.cardPacket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.selectMenu(Integer.valueOf(position), mList.get(position));
+                activity.selectPacket(Integer.valueOf(position), mList.get(position));
             }
         });
     }
@@ -60,16 +62,16 @@ public class CrudMenuAdapter extends RecyclerView.Adapter<CrudMenuAdapter.MyView
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView txtMenuTitle;
-        TextView txtMenuPrice;
-        ImageView imgMenuThumb;
-        MaterialCardView cardMenu;
+        TextView txtPacketTitle;
+        TextView txtPacketAmount;
+        ImageView imgPacketThumb;
+        MaterialCardView cardPacket;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            txtMenuTitle = itemView.findViewById(R.id.txtMenuTitle);
-            txtMenuPrice = itemView.findViewById(R.id.txtMenuPrice);
-            imgMenuThumb = itemView.findViewById(R.id.imgMenuThumb);
-            cardMenu = itemView.findViewById(R.id.cardMenu);
+            txtPacketTitle = itemView.findViewById(R.id.txtPacketTitle);
+            txtPacketAmount = itemView.findViewById(R.id.txtPacketAmount);
+            imgPacketThumb = itemView.findViewById(R.id.imgPacketThumb);
+            cardPacket = itemView.findViewById(R.id.cardPacket);
         }
     }
 }

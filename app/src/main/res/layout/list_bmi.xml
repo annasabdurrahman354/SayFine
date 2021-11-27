@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="15dp">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -29,27 +29,27 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="18,4"
                 android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/txtBmiHeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="Tinggi 169 Cm" />
+                android:fontFamily="@font/poppins_medium"
+                android:text="Tinggi 169 cm" />
 
             <TextView
                 android:id="@+id/txtBmiWeight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="Berat 60 Kg" />
+                android:fontFamily="@font/poppins_medium"
+                android:text="Berat 60 kg" />
 
             <TextView
                 android:id="@+id/txtBmiDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
+                android:fontFamily="@font/poppins_medium"
                 android:text="24 Januari 2020 12:40" />
 
             <com.google.android.material.card.MaterialCardView
@@ -72,7 +72,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="3dp"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="Sehat"
+                    android:text="Normal"
                     android:textAllCaps="true"
                     android:textColor="@color/SecondaryLight" />
             </com.google.android.material.card.MaterialCardView>

@@ -5,14 +5,12 @@ import com.google.firebase.firestore.DocumentId;
 
 public class BodyMassIndex {
     private String id;
-    private String userId;
-    private Float mass;
     private Float height;
+    private Float mass;
     private Timestamp timestamp;
 
-    public BodyMassIndex(String id, String userId, Float mass, Float height, Timestamp timestamp) {
+    public BodyMassIndex(String id, Float height, Float mass, Timestamp timestamp) {
         this.id = id;
-        this.userId = userId;
         this.mass = mass;
         this.height = height;
         this.timestamp = timestamp;
@@ -24,14 +22,6 @@ public class BodyMassIndex {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public Float getMass() {

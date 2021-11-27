@@ -2,6 +2,7 @@ package com.healthymeals.sayfine.adapter.crud;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.card.MaterialCardView;
 import com.healthymeals.sayfine.R;
+import com.healthymeals.sayfine.activity.MenuDetailActivity;
+import com.healthymeals.sayfine.helper.IntentHelper;
 import com.healthymeals.sayfine.model.Menu;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.RecyclerViewHolder> {
     private Context context;
@@ -44,7 +45,9 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.Recycl
         holder.cardMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*context.startActivity(......);*/
+                IntentHelper.addObjectForKey(mList.get(position), "clickedMenu");
+                Intent intent = new Intent (v.getContext(), MenuDetailActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
     }
@@ -63,7 +66,7 @@ public class MenuListAdapter extends RecyclerView.Adapter<MenuListAdapter.Recycl
             super(itemView);
             txtMenuTitle = itemView.findViewById(R.id.txtMenuTitle);
             txtMenuPrice = itemView.findViewById(R.id.txtMenuPrice);
-            imgMenuThumb = itemView.findViewById(R.id.imgThumb);
+            imgMenuThumb = itemView.findViewById(R.id.imgMenuThumb);
             cardMenu = itemView.findViewById(R.id.cardMenu);
         }
     }

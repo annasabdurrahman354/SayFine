@@ -38,7 +38,7 @@
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/roboto_medium"
                     android:includeFontPadding="false"
-                    android:text="Menu"
+                    android:text="Indeks Massa Tubuh"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/SecondaryDark"
@@ -78,24 +78,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
-            android:text="BMI(kg/m²)"
+            android:text="IMT(kg/m²)"
             android:textColor="#000000"
             android:textSize="20sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins"
+            android:fontFamily="@font/roboto_regular"
             android:textColor="#7E000000"
             android:textSize="14sp"
-            tools:text="Rentang dan kategori BMI berasal dari Wiki." />
+            tools:text="Rentang dan kategori IMT berasal dari Wiki." />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Berat badan :"
+            android:text="Berat badan (kg) :"
             android:textColor="#000000"
             android:textSize="20sp" />
 
@@ -106,8 +106,9 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/rounded_edittextbox"
             android:ems="10"
-            android:fontFamily="@font/roboto"
-            android:inputType="number"
+            android:fontFamily="@font/roboto_regular"
+            android:inputType="numberDecimal"
+            android:paddingLeft="10dp"
             android:textSize="20sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -116,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/roboto_medium"
-            android:text="Tinggi badan :"
+            android:text="Tinggi badan (cm) :"
             android:textColor="#000000"
             android:textSize="20sp" />
 
@@ -127,8 +128,9 @@
             android:layout_marginTop="5dp"
             android:background="@drawable/rounded_edittextbox"
             android:ems="10"
-            android:fontFamily="@font/roboto"
-            android:inputType="number"
+            android:fontFamily="@font/roboto_regular"
+            android:inputType="numberDecimal"
+            android:paddingStart="10dp"
             android:textSize="20sp"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
@@ -158,20 +160,19 @@
             android:id="@+id/pgbBmi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="10dp"
             app:optionBottomTooltipColor="@color/accent"
-            app:optionBottomTooltipSteps="18"
-            app:optionBottomTooltipText="Obesitas"
-            app:optionLeftText="15"
+            app:optionBottomTooltipSteps="8"
+            app:optionBottomTooltipText="Status IMT Anda"
+            app:optionLeftText="10"
             app:optionProgressFillColor="#B41717"
-            app:optionProgressFillSteps="18"
-            app:optionProgressTotalSteps="100"
+            app:optionProgressFillSteps="8"
+            app:optionProgressTotalSteps="30"
             app:optionRightText="40"
             app:optionTopTooltipColor="@color/primary"
-            app:optionTopTooltipText="BMI Anda: 18" />
+            app:optionTopTooltipText="IMT Anda akan muncul disini" />
 
     </LinearLayout>
 </RelativeLayout>

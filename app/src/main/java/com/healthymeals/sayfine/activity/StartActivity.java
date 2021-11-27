@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,6 +21,7 @@ import com.healthymeals.sayfine.R;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
+    private LinearLayout lnrStart;
     private Button btnGoToRegister;
     private Button btnGoToLogin;
     private FirebaseAuth mAuth;
@@ -39,10 +41,10 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
-                            startActivity(new Intent(StartActivity.this, MenuListActivity.class));
-                            Toast.makeText(StartActivity.this, mAuth.getUid(), Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(StartActivity.this, MainActivity.class));
                             finish();
                         } else {
+                            lnrStart.setVisibility(View.VISIBLE);
                             mAuth.signOut();
                             Log.d("Check register detail", "Registered but didn't finished the procedure");
                         }
@@ -60,6 +62,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
+        lnrStart = findViewById(R.id.lnrStart);
         btnGoToRegister = findViewById(R.id.btnGoToRegister);
         btnGoToLogin = findViewById(R.id.btnGoToLogin);
 

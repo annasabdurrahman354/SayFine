@@ -28,7 +28,13 @@
             android:name=".activity.CrudMenuActivity"
             android:exported="true" />
         <activity
+            android:name=".activity.CrudPacketActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.BmiActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.BmiHistoryActivity"
             android:exported="true" />
         <activity
             android:name=".activity.OtpActivity"
@@ -44,6 +50,9 @@
             android:exported="true" />
         <activity
             android:name=".activity.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.MenuDetailActivity"
             android:exported="true" />
         <activity
             android:name=".activity.MenuListActivity"
