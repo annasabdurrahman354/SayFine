@@ -55,7 +55,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
         }
-
+        else lnrStart.setVisibility(View.VISIBLE);
     }
 
     @Override

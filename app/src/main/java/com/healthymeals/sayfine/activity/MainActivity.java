@@ -3,6 +3,8 @@ package com.healthymeals.sayfine.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -27,28 +29,33 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         bottomNavBar = findViewById(R.id.mainBottomNavBar);
-        loadFragment(new HomeFragment());
         bottomNavBar.setOnNavigationItemSelectedListener(this);
-
+        changeFragment(new HomeFragment(), HomeFragment.class
+                .getSimpleName());
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
+        Fragment selectedFragment = null;
         switch (item.getItemId()){
             case R.id.navHome:
-                fragment = homeFragment;
+                changeFragment(new HomeFragment(), HomeFragment.class
+                        .getSimpleName());
                 break;
             case R.id.navOrder:
-                fragment = orderFragment;
+                changeFragment(new OrderFragment(),OrderFragment.class
+                        .getSimpleName());
                 break;
             case R.id.navAccount:
-                fragment = accountFragment;
+                changeFragment(new AccountFragment(), AccountFragment.class
+                        .getSimpleName());;
                 break;
             case R.id.navAbout:
-                fragment = aboutFragment;
+                changeFragment(new AboutFragment(), AboutFragment.class
+                        .getSimpleName());
                 break;
         }
-        return loadFragment(fragment);
+
+        return true;
     }
 
     private boolean loadFragment(Fragment fragment) {
@@ -59,5 +66,27 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             return true;
         }
         return false;
+    }
+
+    public void changeFragment(Fragment fragment, String tagFragmentName) {
+        FragmentManager mFragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+
+        Fragment currentFragment = mFragmentManager.getPrimaryNavigationFragment();
+        if (currentFragment != null) {
+            fragmentTransaction.hide(currentFragment);
+        }
+
+        Fragment fragmentTemp = mFragmentManager.findFragmentByTag(tagFragmentName);
+        if (fragmentTemp == null) {
+            fragmentTemp = fragment;
+            fragmentTransaction.add(R.id.mainFrameLayout, fragmentTemp, tagFragmentName);
+        } else {
+            fragmentTransaction.show(fragmentTemp);
+        }
+
+        fragmentTransaction.setPrimaryNavigationFragment(fragmentTemp);
+        fragmentTransaction.setReorderingAllowed(true);
+        fragmentTransaction.commitNowAllowingStateLoss();
     }
 }

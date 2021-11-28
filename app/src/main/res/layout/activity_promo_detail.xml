@@ -39,7 +39,7 @@
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/roboto_medium"
                     android:includeFontPadding="false"
-                    android:text="Artikel"
+                    android:text="Promo"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/SecondaryDark"
@@ -89,17 +89,17 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/txtArticleTitle"
+                    android:id="@+id/txtPromoTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
-                    android:text="Pentingya Zat Besi Bagi Tubuh"
+                    android:text="Diskon 5% ShopeeFood"
                     android:textAlignment="center"
                     android:textColor="@color/SecondaryDark"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/txtArticleDescription"
+                    android:id="@+id/txtPromoDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"

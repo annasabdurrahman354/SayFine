@@ -91,6 +91,7 @@
             android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="18sp"
+            android:visibility="gone"
             app:cornerRadius="36dp"
             tools:ignore="TouchTargetSizeCheck" />
 
@@ -99,7 +100,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/divider_section_separator"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -122,7 +124,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView

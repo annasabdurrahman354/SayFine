@@ -2,6 +2,7 @@ package com.healthymeals.sayfine.adapter.list;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,26 +16,27 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.card.MaterialCardView;
 import com.healthymeals.sayfine.R;
+import com.healthymeals.sayfine.activity.MenuDetailActivity;
 import com.healthymeals.sayfine.activity.crud.CrudPacketActivity;
+import com.healthymeals.sayfine.helper.IntentHelper;
 import com.healthymeals.sayfine.model.Packet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PacketListAdapter extends RecyclerView.Adapter<PacketListAdapter.MyViewHolder> {
-    private CrudPacketActivity activity;
     private Context context;
     private List<Packet> mList;
 
-    public PacketListAdapter(Context context, CrudPacketActivity activity, List<Packet> mList){
+    public PacketListAdapter(Context context, List<Packet> mList){
         this.context = context;
-        this.activity = activity;
         this.mList = mList;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(activity).inflate(R.layout.list_menu , parent , false);
+        View v = LayoutInflater.from(context).inflate(R.layout.list_packet , parent , false);
         return new MyViewHolder(v);
     }
 
@@ -46,7 +48,9 @@ public class PacketListAdapter extends RecyclerView.Adapter<PacketListAdapter.My
         holder.cardPacket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                activity.selectPacket(Integer.valueOf(position), mList.get(position));
+                /*IntentHelper.addObjectForKey(mList.get(position), "clickedPacket");
+                Intent intent = new Intent (v.getContext(), PacketDetailActivity.class);
+                v.getContext().startActivity(intent);*/
             }
         });
     }

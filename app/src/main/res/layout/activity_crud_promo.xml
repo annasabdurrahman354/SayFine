@@ -34,7 +34,7 @@
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/roboto_medium"
                     android:includeFontPadding="false"
-                    android:text="Manajemen Paket"
+                    android:text="Manajemen Promo"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/SecondaryDark"
@@ -54,11 +54,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-5dp">
+        android:layout_marginTop="-5dp"
+        android:background="#00FFFFFF">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#00FFFFFF"
             android:orientation="vertical">
 
             <androidx.cardview.widget.CardView
@@ -82,7 +84,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:fontFamily="@font/roboto_medium"
-                        android:text="Masukkan Data Paket"
+                        android:text="Masukkan Data Promo"
                         android:textAlignment="center"
                         android:textColor="@color/SecondaryDark"
                         android:textSize="20sp" />
@@ -113,35 +115,17 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
+                            android:layout_height="200dp"
                             android:layout_marginBottom="5dp"
                             android:inputType="textLongMessage|textMultiLine" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputMenuList"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="Daftar Menu">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/test"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="5dp"
-                            android:clickable="true"
-                            android:drawableEnd="@drawable/ic_24_arrow_drop_down"
-                            android:editable="false"
-                            android:focusable="false"
-                            android:singleLine="true" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageButton
                         android:id="@+id/imgThumb"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:background="#00FFFFFF"
                         android:scaleType="fitCenter"
@@ -225,7 +209,8 @@
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="-5dp" />
+                android:layout_marginTop="-5dp"
+                android:background="#00FFFFFF" />
 
         </LinearLayout>
     </ScrollView>

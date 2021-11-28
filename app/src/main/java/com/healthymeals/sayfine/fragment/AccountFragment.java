@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -27,6 +28,8 @@ import com.healthymeals.sayfine.activity.crud.CrudArticleActivity;
 import com.healthymeals.sayfine.activity.crud.CrudMenuActivity;
 import com.healthymeals.sayfine.activity.crud.CrudPacketActivity;
 import com.healthymeals.sayfine.activity.StartActivity;
+import com.healthymeals.sayfine.activity.crud.CrudPromoActivity;
+import com.healthymeals.sayfine.model.User;
 
 public class AccountFragment extends Fragment {
     private CardView cardAddress;
@@ -40,6 +43,7 @@ public class AccountFragment extends Fragment {
     private ImageButton btnLogout;
     private TextView txtName;
 
+    private User user;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
 
@@ -62,6 +66,7 @@ public class AccountFragment extends Fragment {
         cardDBPromo = view.findViewById(R.id.cardDatabasePromo);
         imgProfile = view.findViewById(R.id.imgProfile);
         txtName = view.findViewById(R.id.txtName);
+        btnLogout = view.findViewById(R.id.btnLogout);
 
         firebaseFirestore.collection("Users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -69,8 +74,9 @@ public class AccountFragment extends Fragment {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        txtName.setText(document.getString("name"));
-                        Glide.with(view.getContext()).load(document.getString("profileUrl")).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgProfile);
+                        user = new User(document.getId(), document.getString("name"), document.getString("profileUrl"), document.getString("phoneNumber"), document.getString("mainAddressId"));
+                        txtName.setText(user.getName());
+                        Glide.with(view.getContext()).load(user.getProfileUrl()).into(imgProfile);
                         Log.d("Success", "DocumentSnapshot data: " + document.getData());
                     } else {
                         Log.d("ERROR", "No such document");
@@ -108,6 +114,13 @@ public class AccountFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        cardDBPromo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CrudPromoActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,5 +133,11 @@ public class AccountFragment extends Fragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
     }
 }

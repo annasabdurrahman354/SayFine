@@ -34,7 +34,7 @@ public class CrudPacketAdapter extends RecyclerView.Adapter<CrudPacketAdapter.My
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(activity).inflate(R.layout.list_menu , parent , false);
+        View v = LayoutInflater.from(activity).inflate(R.layout.list_packet , parent , false);
         return new MyViewHolder(v);
     }
 
