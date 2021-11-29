@@ -8,15 +8,19 @@ public class Order {
     private String id;
     private String userId;
     private String menuId;
-    private Boolean finish;
-    private Timestamp dateOrder;
+    private String menuName;
+    private Integer orderBy;
+    private Boolean verified;
+    private Timestamp timestamp;
 
-    public Order(String id, String userId, String menuId, Boolean finish, Timestamp dateOrder) {
+    public Order(String id, String userId, String menuId, String menuName, Integer orderBy, Boolean verified, Timestamp timestamp) {
         this.id = id;
         this.userId = userId;
         this.menuId = menuId;
-        this.finish = finish;
-        this.dateOrder = dateOrder;
+        this.menuName = menuName;
+        this.orderBy = orderBy;
+        this.verified = verified;
+        this.timestamp = timestamp;
     }
 
     public String getId() {
@@ -43,19 +47,35 @@ public class Order {
         this.menuId = menuId;
     }
 
-    public Boolean getFinish() {
-        return finish;
+    public String getMenuName() {
+        return menuName;
     }
 
-    public void setFinish(Boolean finish) {
-        this.finish = finish;
+    public void setMenuName(String menuName) {
+        this.menuName = menuName;
     }
 
-    public Timestamp getDateOrder() {
-        return dateOrder;
+    public Integer getOrderBy() {
+        return orderBy;
     }
 
-    public void setDateOrder(Timestamp dateOrder) {
-        this.dateOrder = dateOrder;
+    public void setOrderBy(Integer orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Timestamp timestamp) {
+        this.timestamp = timestamp;
     }
 }

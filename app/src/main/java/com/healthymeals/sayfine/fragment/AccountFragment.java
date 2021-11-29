@@ -1,6 +1,7 @@
 package com.healthymeals.sayfine.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,19 +18,26 @@ import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.healthymeals.sayfine.GlideApp;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.BmiActivity;
+import com.healthymeals.sayfine.activity.ProfileSettingActivity;
 import com.healthymeals.sayfine.activity.crud.CrudArticleActivity;
 import com.healthymeals.sayfine.activity.crud.CrudMenuActivity;
 import com.healthymeals.sayfine.activity.crud.CrudPacketActivity;
 import com.healthymeals.sayfine.activity.StartActivity;
 import com.healthymeals.sayfine.activity.crud.CrudPromoActivity;
 import com.healthymeals.sayfine.model.User;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
     private CardView cardAddress;
@@ -38,8 +46,10 @@ public class AccountFragment extends Fragment {
     private CardView cardDBMenu;
     private CardView cardDBOrder;
     private CardView cardDBPacket;
+    private CardView cardDBProfile;
     private CardView cardDBPromo;
     private ImageView imgProfile;
+    private CircleImageView cc;
     private ImageButton btnLogout;
     private TextView txtName;
 
@@ -63,6 +73,7 @@ public class AccountFragment extends Fragment {
         cardDBMenu = view.findViewById(R.id.cardDatabaseMenu);
         cardDBOrder = view.findViewById(R.id.cardDatabaseOrder);
         cardDBPacket = view.findViewById(R.id.cardDatabasePacket);
+        cardDBProfile = view.findViewById(R.id.cardProfile);
         cardDBPromo = view.findViewById(R.id.cardDatabasePromo);
         imgProfile = view.findViewById(R.id.imgProfile);
         txtName = view.findViewById(R.id.txtName);
@@ -76,7 +87,17 @@ public class AccountFragment extends Fragment {
                     if (document.exists()) {
                         user = new User(document.getId(), document.getString("name"), document.getString("profileUrl"), document.getString("phoneNumber"), document.getString("mainAddressId"));
                         txtName.setText(user.getName());
-                        Glide.with(view.getContext()).load(user.getProfileUrl()).into(imgProfile);
+
+                        GlideApp.with(getContext())
+                                .asBitmap()
+                                .load(user.getProfileUrl())
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(new SimpleTarget<Bitmap>() {
+                                    @Override
+                                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                        imgProfile.setImageBitmap(resource);
+                                    }
+                                });
                         Log.d("Success", "DocumentSnapshot data: " + document.getData());
                     } else {
                         Log.d("ERROR", "No such document");
@@ -111,6 +132,13 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CrudPacketActivity.class);
+                startActivity(intent);
+            }
+        });
+        cardDBProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfileSettingActivity.class);
                 startActivity(intent);
             }
         });

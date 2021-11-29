@@ -3,6 +3,7 @@ package com.healthymeals.sayfine.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,15 +11,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.Registry;
+import com.bumptech.glide.annotation.GlideModule;
+import com.bumptech.glide.module.AppGlideModule;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.StorageReference;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.authentication.LoginActivity;
 import com.healthymeals.sayfine.activity.authentication.RegisterActivity;
+
+import java.io.InputStream;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -88,4 +97,5 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 break;
         }
     }
+
 }

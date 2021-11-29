@@ -67,6 +67,9 @@
             android:name=".activity.PromoDetailActivity"
             android:exported="true" />
         <activity
+            android:name=".activity.ProfileSettingActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.MenuListActivity"
             android:exported="true" />
         <activity

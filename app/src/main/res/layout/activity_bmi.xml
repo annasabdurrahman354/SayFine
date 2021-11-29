@@ -51,9 +51,9 @@
                     android:layout_alignParentEnd="true"
                     android:layout_centerInParent="true"
                     android:background="?selectableItemBackgroundBorderless"
-                    android:tint="@color/SecondaryDark"
                     app:srcCompat="@drawable/ic_24_history"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck"
+                    app:tint="@color/SecondaryDark" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -172,7 +172,23 @@
             app:optionProgressTotalSteps="30"
             app:optionRightText="40"
             app:optionTopTooltipColor="@color/primary"
-            app:optionTopTooltipText="IMT Anda akan muncul disini" />
+            app:optionTopTooltipText="IMT Anda akan muncul disini" >
+
+        </com.anujkumarsharma.tooltipprogressbar.TooltipProgressBar>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pgbBmi"
+            app:srcCompat="@drawable/pic_bmi" />
 
     </LinearLayout>
 </RelativeLayout>
