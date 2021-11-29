@@ -30,7 +30,7 @@ public class PromoDetailActivity extends AppCompatActivity {
 
         Glide.with(this).load(clickedPromo.getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgThumb);
         txtPromoTitle.setText(clickedPromo.getTitle());
-        txtPromoDescription.setText(clickedPromo.getMenuId());
+        txtPromoDescription.setText(clickedPromo.getDescription());
 
     }
 }

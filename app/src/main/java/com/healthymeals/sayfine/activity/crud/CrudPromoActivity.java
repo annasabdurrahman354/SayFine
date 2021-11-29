@@ -151,7 +151,7 @@ public class CrudPromoActivity extends AppCompatActivity {
         selectedPromoIndex = index;
         selectedPromo = promo;
         inputTitle.getEditText().setText(promo.getTitle());
-        inputDescription.getEditText().setText(promo.getMenuId());
+        inputDescription.getEditText().setText(promo.getDescription());
         Glide.with(this).load(promo.getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(imgThumb);
         lnrSelected.setVisibility(View.VISIBLE);
         btnCreate.setVisibility(View.GONE);

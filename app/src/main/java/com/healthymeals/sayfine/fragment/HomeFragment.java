@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -22,6 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.ArticleListActivity;
 import com.healthymeals.sayfine.activity.BmiActivity;
+import com.healthymeals.sayfine.activity.ChatRoomActivity;
 import com.healthymeals.sayfine.activity.MenuListActivity;
 import com.healthymeals.sayfine.activity.crud.CrudPacketActivity;
 import com.healthymeals.sayfine.adapter.list.MenuListAdapter;
@@ -36,6 +38,7 @@ public class HomeFragment extends Fragment {
     private Button btnMenu;
     private Button btnBmi;
     private Button btnArtikel;
+    private ImageButton btnChat;
     private RecyclerView recyclerViewPacket;
     private RecyclerView recyclerViewPromo;
 
@@ -59,6 +62,7 @@ public class HomeFragment extends Fragment {
         btnMenu = view.findViewById(R.id.btnMenu);
         btnBmi = view.findViewById(R.id.btnBmi);
         btnArtikel = view.findViewById(R.id.btnArticle);
+        btnChat = view.findViewById(R.id.btnChat);
         recyclerViewPacket = view.findViewById(R.id.recyclerViewPacket);
         recyclerViewPromo = view.findViewById(R.id.recyclerViewPromo);
 
@@ -81,6 +85,14 @@ public class HomeFragment extends Fragment {
         recyclerViewPromo.setLayoutManager(layoutManager);
         recyclerViewPromo.setNestedScrollingEnabled(false);
         recyclerViewPromo.setAdapter(promoAdapter);
+
+        btnChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override

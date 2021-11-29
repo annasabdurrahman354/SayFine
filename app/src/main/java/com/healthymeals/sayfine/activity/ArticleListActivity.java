@@ -57,7 +57,7 @@ public class ArticleListActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     }
                 } else {
-                    Toast.makeText(ArticleListActivity.this, "Gagal mendapatkan data IMT!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ArticleListActivity.this, "Gagal mendapatkan data artikel!", Toast.LENGTH_SHORT).show();
                     Log.e("Firestore error", task.getException().toString());
                     return;
                 }

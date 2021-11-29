@@ -4,15 +4,20 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Annas/.gradle/caches/transforms-3/ec469b1b299769fdac21524b61df8c22/transformed/jetified-imagepicker-2.1/res/layout/dialog_choose_app.xml" value="0.146484375" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable-v24/ic_send.xml" value="0.2752895752895753" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable-v24/ic_send_pink.xml" value="0.2752895752895753" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable-v24/shape_chat_received.xml" value="0.2752895752895753" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/ic_30_menu.xml" value="0.2752895752895753" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/pic_gofood1.xml" value="0.278515625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/pic_grabfood.xml" value="0.278515625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/prog.xml" value="0.278515625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/drawable/shape_chat_sent.xml" value="0.2752895752895753" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article_detail.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_article_list.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_bmi.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_bmi_history.xml" value="0.26640625" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_chat_room.xml" value="0.300462962962963" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_article.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_menu.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/activity_crud_packet.xml" value="0.26640625" />
@@ -42,6 +47,7 @@
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_address.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_article.xml" value="0.25" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_bmi.xml" value="0.33" />
+        <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_chat.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_menu.xml" value="0.26640625" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_menu_select.xml" value="0.33" />
         <entry key="..\:/Users/Annas/Documents/GitHub/SayFine/app/src/main/res/layout/list_menu_select2.xml" value="0.26640625" />

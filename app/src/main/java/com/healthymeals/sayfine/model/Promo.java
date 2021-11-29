@@ -5,14 +5,14 @@ import com.google.firebase.Timestamp;
 public class Promo {
     private String id;
     private String title;
-    private String menuId;
+    private String description;
     private String thumbUrl;
     private Timestamp timestamp;
 
-    public Promo(String id, String title, String menuId, String thumbUrl, Timestamp timestamp) {
+    public Promo(String id, String title, String description, String thumbUrl, Timestamp timestamp) {
         this.id = id;
         this.title = title;
-        this.menuId = menuId;
+        this.description = description;
         this.thumbUrl = thumbUrl;
         this.timestamp = timestamp;
     }
@@ -33,12 +33,12 @@ public class Promo {
         this.title = title;
     }
 
-    public String getMenuId() {
-        return menuId;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMenuId(String menuId) {
-        this.menuId = menuId;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getThumbUrl() {
