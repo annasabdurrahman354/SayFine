@@ -209,7 +209,7 @@ public class CrudPacketActivity extends AppCompatActivity {
     }
 
     private void addPacket(String title, String description, Uri thumbUrl, ArrayList<String> menuListId){
-        if (!title.isEmpty() && !description.isEmpty() && thumbUrl != null){
+        if (!title.isEmpty() && !description.isEmpty() && thumbUrl != null && !menuListId.isEmpty()){
             String packetId = firebaseFirestore.collection("Packets").document().getId();
             storageReference = FirebaseStorage.getInstance().getReference().child("packets/" + packetId + ".jpg");
             storageReference.putFile(thumbUrl).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {

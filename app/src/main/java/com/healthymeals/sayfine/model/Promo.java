@@ -1,19 +1,18 @@
 package com.healthymeals.sayfine.model;
 
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.DocumentId;
 
 public class Promo {
     private String id;
     private String title;
-    private String description;
+    private String menuId;
     private String thumbUrl;
     private Timestamp timestamp;
 
-    public Promo(String id, String title, String description, String thumbUrl, Timestamp timestamp) {
+    public Promo(String id, String title, String menuId, String thumbUrl, Timestamp timestamp) {
         this.id = id;
         this.title = title;
-        this.description = description;
+        this.menuId = menuId;
         this.thumbUrl = thumbUrl;
         this.timestamp = timestamp;
     }
@@ -34,12 +33,12 @@ public class Promo {
         this.title = title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getMenuId() {
+        return menuId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setMenuId(String menuId) {
+        this.menuId = menuId;
     }
 
     public String getThumbUrl() {

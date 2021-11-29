@@ -37,7 +37,7 @@ public class OtpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         OTP = getIntent().getStringExtra("auth");
-        type = getIntent().getStringExtra("tpe");
+        type = getIntent().getStringExtra("type");
         phoneNumber = getIntent().getStringExtra("phoneNumber");
 
         btnVerify = findViewById(R.id.btnVerify);
