@@ -16,9 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.healthymeals.sayfine.GlideApp;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.BmiActivity;
+import com.healthymeals.sayfine.activity.ChatRoomListActivity;
 import com.healthymeals.sayfine.activity.ProfileSettingActivity;
 import com.healthymeals.sayfine.activity.crud.CrudArticleActivity;
 import com.healthymeals.sayfine.activity.crud.CrudMenuActivity;
@@ -42,6 +41,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AccountFragment extends Fragment {
     private CardView cardAddress;
     private CardView cardBmi;
+    private CardView cardCustomerChat;
     private CardView cardDBArticle;
     private CardView cardDBMenu;
     private CardView cardDBOrder;
@@ -53,7 +53,7 @@ public class AccountFragment extends Fragment {
     private ImageButton btnLogout;
     private TextView txtName;
 
-    private User user;
+    private User mUser;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
 
@@ -69,6 +69,7 @@ public class AccountFragment extends Fragment {
         firebaseFirestore = FirebaseFirestore.getInstance();
 
         cardBmi = view.findViewById(R.id.cardBmi);
+        cardCustomerChat = view.findViewById(R.id.cardCustomerChat);
         cardDBArticle = view.findViewById(R.id.cardDatabaseArticle);
         cardDBMenu = view.findViewById(R.id.cardDatabaseMenu);
         cardDBOrder = view.findViewById(R.id.cardDatabaseOrder);
@@ -85,12 +86,11 @@ public class AccountFragment extends Fragment {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        user = new User(document.getId(), document.getString("name"), document.getString("profileUrl"), document.getString("phoneNumber"), document.getString("mainAddressId"));
-                        txtName.setText(user.getName());
-
+                        mUser = new User(document.getId(), document.getString("name"), document.getString("profileUrl"), document.getString("phoneNumber"), document.getString("mainAddressId"));
+                        txtName.setText(mUser.getName());
                         GlideApp.with(getContext())
                                 .asBitmap()
-                                .load(user.getProfileUrl())
+                                .load(mUser.getProfileUrl())
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(new SimpleTarget<Bitmap>() {
                                     @Override
@@ -107,10 +107,18 @@ public class AccountFragment extends Fragment {
                 }
             }
         });
+
         cardBmi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BmiActivity.class);
+                startActivity(intent);
+            }
+        });
+        cardCustomerChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChatRoomListActivity.class);
                 startActivity(intent);
             }
         });

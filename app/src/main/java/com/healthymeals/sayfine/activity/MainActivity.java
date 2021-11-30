@@ -7,21 +7,24 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.fragment.AboutFragment;
 import com.healthymeals.sayfine.fragment.AccountFragment;
 import com.healthymeals.sayfine.fragment.HomeFragment;
 import com.healthymeals.sayfine.fragment.OrderFragment;
+import com.healthymeals.sayfine.model.User;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
     BottomNavigationView bottomNavBar;
-    private HomeFragment homeFragment = new HomeFragment();
-    private OrderFragment orderFragment = new OrderFragment();
-    private AccountFragment accountFragment = new AccountFragment();
-    private AboutFragment aboutFragment = new AboutFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

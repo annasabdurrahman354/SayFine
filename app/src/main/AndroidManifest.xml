@@ -46,7 +46,13 @@
             android:name=".activity.BmiHistoryActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.ChatRoomActivity"
+            android:name=".activity.AdminChatRoomActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.ChatRoomListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.CustomerChatRoomActivity"
             android:exported="true" />
         <activity
             android:name=".activity.authentication.OtpActivity"

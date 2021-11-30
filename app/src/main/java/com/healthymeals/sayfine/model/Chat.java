@@ -4,13 +4,13 @@ import com.google.firebase.Timestamp;
 
 public class Chat {
     private String id;
-    private String userId;
+    private Boolean isCustomer;
     private String text;
     private Timestamp timestamp;
 
-    public Chat(String id, String userId, String text, Timestamp timestamp) {
+    public Chat(String id, Boolean isCustomer, String text, Timestamp timestamp) {
         this.id = id;
-        this.userId = userId;
+        this.isCustomer = isCustomer;
         this.text = text;
         this.timestamp = timestamp;
     }
@@ -23,12 +23,12 @@ public class Chat {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public Boolean getCustomer() {
+        return isCustomer;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setCustomer(Boolean customer) {
+        isCustomer = customer;
     }
 
     public String getText() {

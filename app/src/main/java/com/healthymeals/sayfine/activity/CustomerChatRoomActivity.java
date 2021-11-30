@@ -13,10 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -25,19 +23,15 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.healthymeals.sayfine.R;
-import com.healthymeals.sayfine.activity.crud.CrudPacketActivity;
-import com.healthymeals.sayfine.adapter.list.ChatListAdapter;
+import com.healthymeals.sayfine.adapter.list.CustomerChatListAdapter;
 import com.healthymeals.sayfine.model.Chat;
-import com.healthymeals.sayfine.model.Menu;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class ChatRoomActivity extends AppCompatActivity {
+public class CustomerChatRoomActivity extends AppCompatActivity {
 
     private EditText inputChat;
     private ImageButton btnSend;
@@ -47,7 +41,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     private FirebaseFirestore firebaseFirestore;
 
     private ArrayList<Chat> list = new ArrayList<>();
-    private ChatListAdapter adapter;
+    private CustomerChatListAdapter adapter;
 
     @Override
     protected void onStart() {
@@ -70,7 +64,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         getChats();
-        adapter = new ChatListAdapter(this, this, list, mAuth.getUid());
+        adapter = new CustomerChatListAdapter(this, this, list);
         recyclerView.setAdapter(adapter);
 
         btnSend.setOnClickListener(new View.OnClickListener() {
@@ -82,30 +76,41 @@ public class ChatRoomActivity extends AppCompatActivity {
     }
 
     private void getChats(){
-        firebaseFirestore.collection("ChatRooms").document(mAuth.getUid()).collection("Chats").orderBy("timestamp", Query.Direction.ASCENDING).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        Log.d("Firestore error", document.getId() + " => " + document.getData());
-                        Chat chat = new Chat(document.getId(),document.getString("userId"), document.getString("text"), document.getTimestamp("timestamp"));
-                        list.add(chat);
-                        adapter.notifyDataSetChanged();
+        firebaseFirestore.collection("ChatRooms").document(mAuth.getUid()).collection("Chats").orderBy("timestamp", Query.Direction.ASCENDING)
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (error != null){
+                            Toast.makeText(CustomerChatRoomActivity.this, "Gagal mendapatkan data chat!", Toast.LENGTH_SHORT).show();
+                            Log.e("Firestore error",error.getMessage());
+                            return;
+                        }
+
+                        for (DocumentChange dc : value.getDocumentChanges()){
+                            Chat chat = new Chat(dc.getDocument().getId(), dc.getDocument().getBoolean("isCustomer"), dc.getDocument().getString("text"), dc.getDocument().getTimestamp("timestamp"));
+                            switch (dc.getType()) {
+                                case ADDED:
+                                    list.add(chat);
+                                    break;
+                                case MODIFIED:
+
+                                    break;
+                                case REMOVED:
+
+                                    break;
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                        recyclerView.scrollToPosition(list.size() - 1);
                     }
-                } else {
-                    Toast.makeText(ChatRoomActivity.this, "Gagal mendapatkan data chat!", Toast.LENGTH_SHORT).show();
-                    Log.e("Firestore error", task.getException().toString());
-                    return;
-                }
-            }
-        });
+                });
     }
 
     private void sendChat(){
         if (!inputChat.getText().toString().isEmpty()){
             Timestamp now = Timestamp.now();
             HashMap<String, Object> map = new HashMap<>();
-            map.put("userId", mAuth.getUid());
+            map.put("isCustomer", true);
             map.put("text", inputChat.getText().toString());
             map.put("timestamp", now);
             firebaseFirestore.collection("ChatRooms").document(mAuth.getUid()).collection("Chats")
@@ -113,7 +118,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            list.add(new Chat(documentReference.getId(), mAuth.getUid(), inputChat.getText().toString(),now));
+                            /*list.add(new Chat(documentReference.getId(), true, inputChat.getText().toString(),now));*/
                             inputChat.setText("");
                             adapter.notifyDataSetChanged();
                             firebaseFirestore.collection("ChatRooms").document(mAuth.getUid())
@@ -140,7 +145,7 @@ public class ChatRoomActivity extends AppCompatActivity {
                         }
                     });
         }
-        else Toast.makeText(ChatRoomActivity.this, "Isi chat terlebih dahulu!", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(CustomerChatRoomActivity.this, "Isi chat terlebih dahulu!", Toast.LENGTH_SHORT).show();
 
     }
 }

@@ -1,6 +1,7 @@
 package com.healthymeals.sayfine.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,29 +11,47 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthOptions;
+import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.healthymeals.sayfine.GlideApp;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.ArticleListActivity;
 import com.healthymeals.sayfine.activity.BmiActivity;
-import com.healthymeals.sayfine.activity.ChatRoomActivity;
+import com.healthymeals.sayfine.activity.CustomerChatRoomActivity;
 import com.healthymeals.sayfine.activity.MenuListActivity;
-import com.healthymeals.sayfine.activity.crud.CrudPacketActivity;
-import com.healthymeals.sayfine.adapter.list.MenuListAdapter;
+import com.healthymeals.sayfine.activity.authentication.LoginActivity;
 import com.healthymeals.sayfine.adapter.list.PacketListAdapter;
 import com.healthymeals.sayfine.adapter.list.PromoListAdapter;
 import com.healthymeals.sayfine.model.Packet;
 import com.healthymeals.sayfine.model.Promo;
+import com.healthymeals.sayfine.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
 public class HomeFragment extends Fragment {
     private Button btnMenu;
@@ -49,6 +68,8 @@ public class HomeFragment extends Fragment {
     private ArrayList<Promo> promoList = new ArrayList<>();
 
     private FirebaseFirestore firebaseFirestore;
+    private FirebaseAuth mAuth;
+    private User mUser;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -67,16 +88,31 @@ public class HomeFragment extends Fragment {
         recyclerViewPromo = view.findViewById(R.id.recyclerViewPromo);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         getPackets();
         getPromotions();
 
+        firebaseFirestore.collection("Users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        mUser = new User(document.getId(), document.getString("name"), document.getString("profileUrl"), document.getString("phoneNumber"), document.getString("mainAddressId"));
+                        Log.d("Success", "DocumentSnapshot data: " + document.getData());
+                    } else {
+                        Log.d("ERROR", "No such document");
+                    }
+                } else {
+                    Log.d("ERROR", "get failed with ", task.getException());
+                }
+            }
+        });
         packetAdapter = new PacketListAdapter(getContext(), packetList);
         recyclerViewPacket.setHasFixedSize(true);
         recyclerViewPacket.setLayoutManager(new LinearLayoutManager(view.getContext()));
         recyclerViewPacket.setAdapter(packetAdapter);
-
-
 
         promoAdapter = new PromoListAdapter(getContext(), promoList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -89,7 +125,8 @@ public class HomeFragment extends Fragment {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ChatRoomActivity.class);
+                checkChatRoom();
+                Intent intent = new Intent(getActivity(), CustomerChatRoomActivity.class);
                 startActivity(intent);
             }
         });
@@ -160,7 +197,7 @@ public class HomeFragment extends Fragment {
 
                 for (DocumentChange dc : value.getDocumentChanges()){
                     Promo promo;
-                    promo = new Promo(dc.getDocument().getId(),dc.getDocument().getString("title"), dc.getDocument().getString("description"), dc.getDocument().getString("thumbUrl"), dc.getDocument().getTimestamp("timestamp"));
+                    promo = new Promo(dc.getDocument().getId(), dc.getDocument().getString("title"), dc.getDocument().getString("description"), dc.getDocument().getString("thumbUrl"), dc.getDocument().getTimestamp("timestamp"));
                     switch (dc.getType()) {
                         case ADDED:
                         case REMOVED:
@@ -173,5 +210,38 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void checkChatRoom(){
+        firebaseFirestore.collection("ChatRooms").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (!document.exists()) {
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("userName", mUser.getName());
+                        map.put("lastChat", null);
+                        firebaseFirestore.collection("ChatRooms").document(mAuth.getUid())
+                                .set(map)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d("SUCCESS", "DocumentSnapshot successfully updated!");
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w("ERROR", "Error updating document", e);
+                                    }
+                                });
+                    }
+                } else {
+                    Log.d("TAG", "get failed with ", task.getException());
+                }
+            }
+        });
+
     }
 }
