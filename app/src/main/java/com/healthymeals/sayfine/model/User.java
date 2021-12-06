@@ -2,21 +2,21 @@ package com.healthymeals.sayfine.model;
 
 import androidx.annotation.Nullable;
 
-import com.google.firebase.firestore.DocumentId;
+import com.google.firebase.Timestamp;
 
 public class User {
     private String id;
     private String name;
     private String profileUrl;
     private String phoneNumber;
-    private String mainAddressId;
+    private Timestamp lastOrder;
 
-    public User(String id, String name, @Nullable String profileUrl, String phoneNumber, @Nullable String mainAddressId) {
+    public User(String id, String name, @Nullable String profileUrl, String phoneNumber, @Nullable Timestamp lastOrder) {
         this.id = id;
         this.name = name;
         this.profileUrl = profileUrl;
         this.phoneNumber = phoneNumber;
-        this.mainAddressId = mainAddressId;
+        this.lastOrder = lastOrder;
     }
 
     public String getId() {
@@ -51,11 +51,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getMainAddressId() {
-        return mainAddressId;
+    public Timestamp getLastOrder() {
+        return lastOrder;
     }
 
-    public void setMainAddressId(String mainAddressId) {
-        this.mainAddressId = mainAddressId;
+    public void setLastOrder(Timestamp lastOrder) {
+        this.lastOrder = lastOrder;
     }
 }

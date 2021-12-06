@@ -28,6 +28,9 @@
             android:name=".activity.crud.CrudMenuActivity"
             android:exported="true" />
         <activity
+            android:name=".activity.crud.CrudOrderListActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.crud.CrudPacketActivity"
             android:exported="true" />
         <activity
@@ -71,6 +74,12 @@
             android:exported="true" />
         <activity
             android:name=".activity.MenuDetailActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.OrderedUserListActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.PacketDetailListActivity"
             android:exported="true" />
         <activity
             android:name=".activity.PromoDetailActivity"

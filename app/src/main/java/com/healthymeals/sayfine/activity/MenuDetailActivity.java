@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.Timestamp;
@@ -79,11 +80,12 @@ public class MenuDetailActivity extends AppCompatActivity {
         LinearLayout btnShopeeFood = bottomSheetDialog.findViewById(R.id.btnShopeeFood);
 
         HashMap<String, Object> map = new HashMap<>();
+        Timestamp timestamp = Timestamp.now();
         map.put("userId", mAuth.getUid());
         map.put("menuId", clickedMenu.getId());
         map.put("menuName", clickedMenu.getTitle());
         map.put("verified", false);
-        map.put("timestamp", Timestamp.now());
+        map.put("timestamp", timestamp);
 
         btnGoFood.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,8 +95,15 @@ public class MenuDetailActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()){
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(clickedMenu.getGoFoodUrl())));
-                            bottomSheetDialog.dismiss();
+                            HashMap<String, Object> map2 = new HashMap<>();
+                            map2.put("lastOrder", timestamp);
+                            firebaseFirestore.collection("Users").document(mAuth.getUid()).update(map2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(@NonNull Void unused) {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(clickedMenu.getGoFoodUrl())));
+                                    bottomSheetDialog.dismiss();
+                                }
+                            });
                         }
                     }
                 });
@@ -109,8 +118,15 @@ public class MenuDetailActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()){
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(clickedMenu.getGrabFoodUrl())));
-                            bottomSheetDialog.dismiss();
+                            HashMap<String, Object> map2 = new HashMap<>();
+                            map2.put("lastOrder", timestamp);
+                            firebaseFirestore.collection("Users").document(mAuth.getUid()).update(map2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(@NonNull Void unused) {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(clickedMenu.getGrabFoodUrl())));
+                                    bottomSheetDialog.dismiss();
+                                }
+                            });
                         }
                     }
                 });
@@ -125,8 +141,15 @@ public class MenuDetailActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()){
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(clickedMenu.getShopeeFoodUrl())));
-                            bottomSheetDialog.dismiss();
+                            HashMap<String, Object> map2 = new HashMap<>();
+                            map2.put("lastOrder", timestamp);
+                            firebaseFirestore.collection("Users").document(mAuth.getUid()).update(map2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(@NonNull Void unused) {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(clickedMenu.getShopeeFoodUrl())));
+                                    bottomSheetDialog.dismiss();
+                                }
+                            });
                         }
                     }
                 });

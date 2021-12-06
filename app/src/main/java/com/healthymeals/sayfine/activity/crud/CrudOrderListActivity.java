@@ -1,10 +1,7 @@
-package com.healthymeals.sayfine.activity;
+package com.healthymeals.sayfine.activity.crud;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -13,10 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -25,33 +20,28 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.healthymeals.sayfine.R;
-import com.healthymeals.sayfine.adapter.list.AdminChatListAdapter;
-import com.healthymeals.sayfine.adapter.list.CustomerChatListAdapter;
+import com.healthymeals.sayfine.adapter.crud.CrudOrderListAdapter;
 import com.healthymeals.sayfine.helper.IntentHelper;
-import com.healthymeals.sayfine.model.Article;
-import com.healthymeals.sayfine.model.Chat;
-import com.healthymeals.sayfine.model.ChatRoom;
+import com.healthymeals.sayfine.model.Order;
+import com.healthymeals.sayfine.model.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AdminChatRoomActivity extends AppCompatActivity {
+public class CrudOrderListActivity extends AppCompatActivity {
 
-    private EditText inputChat;
-    private ImageButton btnSend;
     private RecyclerView recyclerView;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
 
-    private ChatRoom clickedChatRoom;
+    private User clickedOrderedUser;
     private String customerId = "";
 
-    private ArrayList<Chat> list = new ArrayList<>();
-    private AdminChatListAdapter adapter;
+    private ArrayList<Order> list = new ArrayList<>();
+    private CrudOrderListAdapter adapter;
 
     @Override
     protected void onStart() {
@@ -62,34 +52,24 @@ public class AdminChatRoomActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_room);
+        setContentView(R.layout.activity_ordered_user_list);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseFirestore = FirebaseFirestore.getInstance();
 
-        btnSend = findViewById(R.id.btnSend);
-        inputChat = findViewById(R.id.inputChat);
-
-        clickedChatRoom = (ChatRoom) IntentHelper.getObjectForKey("clickedChatRoom");
-        customerId = clickedChatRoom.getId().trim();
-        getChats();
+        clickedOrderedUser = (User) IntentHelper.getObjectForKey("clickedOrderedUser");
+        customerId = clickedOrderedUser.getId().trim();
+        getOrders();
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new AdminChatListAdapter(this, this, list);
+        adapter = new CrudOrderListAdapter(this, list);
         recyclerView.setAdapter(adapter);
-
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendChat();
-            }
-        });
     }
 
-    private void getChats(){
+    private void getOrders(){
        /*firebaseFirestore.collection("ChatRooms").document(customerId.toString()).collection("Chats").orderBy("timestamp", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
@@ -127,21 +107,21 @@ public class AdminChatRoomActivity extends AppCompatActivity {
             }
         });*/
 
-        firebaseFirestore.collection("ChatRooms").document(customerId.toString()).collection("Chats").orderBy("timestamp", Query.Direction.ASCENDING)
+        firebaseFirestore.collection("Users").document(customerId.toString()).collection("Orders").orderBy("timestamp", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null){
-                            Toast.makeText(AdminChatRoomActivity.this, "Gagal mendapatkan data chat!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CrudOrderListActivity.this, "Gagal mendapatkan data chat!", Toast.LENGTH_SHORT).show();
                             Log.e("Firestore error",error.getMessage());
                             return;
                         }
 
                         for (DocumentChange dc : value.getDocumentChanges()){
-                            Chat chat = new Chat(dc.getDocument().getId(), dc.getDocument().getBoolean("isCustomer"), dc.getDocument().getString("text"), dc.getDocument().getTimestamp("timestamp"));
+                            Order order = new Order(dc.getDocument().getId(), dc.getDocument().getString("userId"), dc.getDocument().getString("menuId"), dc.getDocument().getString("menuName"), ((Number) dc.getDocument().getDouble("orderBy")).intValue(), dc.getDocument().getBoolean("verified"), dc.getDocument().getTimestamp("timestamp"));
                             switch (dc.getType()) {
                                 case ADDED:
-                                    list.add(chat);
+                                    list.add(order);
                                     break;
                                 case MODIFIED:
 
@@ -154,48 +134,5 @@ public class AdminChatRoomActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    private void sendChat(){
-        if (!inputChat.getText().toString().isEmpty()){
-            Timestamp now = Timestamp.now();
-            HashMap<String, Object> map = new HashMap<>();
-            map.put("isCustomer", false);
-            map.put("text", inputChat.getText().toString());
-            map.put("timestamp", now);
-            firebaseFirestore.collection("ChatRooms").document(customerId).collection("Chats")
-                    .add(map)
-                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                        @Override
-                        public void onSuccess(DocumentReference documentReference) {
-                            /*list.add(new Chat(documentReference.getId(), true, inputChat.getText().toString(),now));*/
-                            inputChat.setText("");
-                            adapter.notifyDataSetChanged();
-                            firebaseFirestore.collection("ChatRooms").document(customerId)
-                                    .update("lastChat", Timestamp.now())
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Log.d("SUCCESS", "DocumentSnapshot successfully updated!");
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w("ERROR", "Error updating document", e);
-                                        }
-                                    });
-
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.w("ERROR", "Error adding document", e);
-                        }
-                    });
-        }
-        else Toast.makeText(AdminChatRoomActivity.this, "Isi chat terlebih dahulu!", Toast.LENGTH_SHORT).show();
-
     }
 }

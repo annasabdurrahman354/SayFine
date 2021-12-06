@@ -1,5 +1,6 @@
 package com.healthymeals.sayfine.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +56,7 @@ public class OrderFragment extends Fragment {
     private void getOrders() {
         firebaseFirestore.collection("Users").document(mAuth.getUid()).collection("Orders")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null){
@@ -70,10 +73,12 @@ public class OrderFragment extends Fragment {
                                     list.add(order);
                                     break;
                                 case MODIFIED:
-
+                                    int i = list.indexOf(list.stream().filter(temp -> temp.getId().equals(order.getId())).findFirst().orElse(null));
+                                    list.set(i, order);
                                     break;
                                 case REMOVED:
-
+                                    i = list.indexOf(list.stream().filter(temp -> temp.getId().equals(order.getId())).findFirst().orElse(null));
+                                    list.remove(i);
                                     break;
                             }
                             adapter.notifyDataSetChanged();

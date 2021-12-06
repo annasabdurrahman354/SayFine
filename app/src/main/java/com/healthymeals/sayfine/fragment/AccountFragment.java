@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.healthymeals.sayfine.GlideApp;
 import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.BmiActivity;
 import com.healthymeals.sayfine.activity.ChatRoomListActivity;
+import com.healthymeals.sayfine.activity.OrderedUserListActivity;
 import com.healthymeals.sayfine.activity.ProfileSettingActivity;
 import com.healthymeals.sayfine.activity.crud.CrudArticleActivity;
 import com.healthymeals.sayfine.activity.crud.CrudMenuActivity;
@@ -49,6 +51,7 @@ public class AccountFragment extends Fragment {
     private CardView cardDBProfile;
     private CardView cardDBPromo;
     private ImageView imgProfile;
+    private LinearLayout lnrAdmin;
     private CircleImageView cc;
     private ImageButton btnLogout;
     private TextView txtName;
@@ -76,6 +79,7 @@ public class AccountFragment extends Fragment {
         cardDBPacket = view.findViewById(R.id.cardDatabasePacket);
         cardDBProfile = view.findViewById(R.id.cardProfile);
         cardDBPromo = view.findViewById(R.id.cardDatabasePromo);
+        lnrAdmin = view.findViewById(R.id.lnrAdmin);
         imgProfile = view.findViewById(R.id.imgProfile);
         txtName = view.findViewById(R.id.txtName);
         btnLogout = view.findViewById(R.id.btnLogout);
@@ -86,7 +90,7 @@ public class AccountFragment extends Fragment {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        mUser = new User(document.getId(), document.getString("name"), document.getString("profileUrl"), document.getString("phoneNumber"), document.getString("mainAddressId"));
+                        mUser = new User(document.getId(), document.getString("name"), document.getString("profileUrl"), document.getString("phoneNumber"), document.getTimestamp("lastOrder"));
                         txtName.setText(mUser.getName());
                         GlideApp.with(getContext())
                                 .asBitmap()
@@ -99,6 +103,9 @@ public class AccountFragment extends Fragment {
                                     }
                                 });
                         Log.d("Success", "DocumentSnapshot data: " + document.getData());
+                        if (!mUser.getPhoneNumber().contains("+628570717273")){
+                            lnrAdmin.setVisibility(View.GONE);
+                        }
                     } else {
                         Log.d("ERROR", "No such document");
                     }
@@ -133,6 +140,13 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), CrudMenuActivity.class);
+                startActivity(intent);
+            }
+        });
+        cardDBOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), OrderedUserListActivity.class);
                 startActivity(intent);
             }
         });

@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -18,6 +19,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.hbb20.CountryCodePicker;
 import com.healthymeals.sayfine.R;
 
@@ -30,13 +36,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private Button btnGoToLogin;
     private Button btnRegister;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore firebaseFirestore;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         mAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         btnRegister = findViewById(R.id.btnRegister);
         btnGoToLogin = findViewById(R.id.btnGoToLogin);
@@ -69,8 +78,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 otpIntent.putExtra("type" , "0");
                 otpIntent.putExtra("phoneNumber" , inputCountryCode.getFullNumberWithPlus());
                 startActivity(otpIntent);
-
-
             }
         };
 
@@ -98,15 +105,34 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.btnRegister:
-                String phoneNumber = inputCountryCode.getFullNumberWithPlus().toString();
+                String phoneNumber = inputCountryCode.getFullNumberWithPlus().toString().trim();
                 if (!phoneNumber.isEmpty()){
-                    PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
-                            .setPhoneNumber(phoneNumber)
-                            .setTimeout(60L , TimeUnit.SECONDS)
-                            .setActivity(RegisterActivity.this)
-                            .setCallbacks(mCallBacks)
-                            .build();
-                    PhoneAuthProvider.verifyPhoneNumber(options);
+                    CollectionReference cref= firebaseFirestore.collection("Users");
+                    Query q1 = cref.whereEqualTo("phoneNumber", phoneNumber);
+                    q1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            boolean isExisting = false;
+                            for (DocumentSnapshot ds : queryDocumentSnapshots) {
+                                String temp;
+                                temp = ds.getString("phoneNumber").trim();
+                                if (phoneNumber.equals(temp)) {
+                                    isExisting = true;
+                                    Toast.makeText(getApplicationContext(), "Nomor Anda sudah terdafarkan!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            if (!isExisting) {
+                                PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
+                                        .setPhoneNumber(phoneNumber)
+                                        .setTimeout(60L , TimeUnit.SECONDS)
+                                        .setActivity(RegisterActivity.this)
+                                        .setCallbacks(mCallBacks)
+                                        .build();
+                                PhoneAuthProvider.verifyPhoneNumber(options);
+                            }
+                        }
+                    });
+
                 }else{
                     Toast.makeText(getApplicationContext(), "Masukkan nomor telepon terlebih dahulu!", Toast.LENGTH_LONG).show();
                 }

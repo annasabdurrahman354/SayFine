@@ -16,12 +16,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.card.MaterialCardView;
 import com.healthymeals.sayfine.R;
-import com.healthymeals.sayfine.activity.MenuDetailActivity;
-import com.healthymeals.sayfine.activity.crud.CrudPacketActivity;
+import com.healthymeals.sayfine.activity.PacketDetailListActivity;
 import com.healthymeals.sayfine.helper.IntentHelper;
 import com.healthymeals.sayfine.model.Packet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PacketListAdapter extends RecyclerView.Adapter<PacketListAdapter.MyViewHolder> {
@@ -48,9 +46,9 @@ public class PacketListAdapter extends RecyclerView.Adapter<PacketListAdapter.My
         holder.cardPacket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*IntentHelper.addObjectForKey(mList.get(position), "clickedPacket");
-                Intent intent = new Intent (v.getContext(), PacketDetailActivity.class);
-                v.getContext().startActivity(intent);*/
+                IntentHelper.addObjectForKey(mList.get(position), "clickedPacket");
+                Intent intent = new Intent (v.getContext(), PacketDetailListActivity.class);
+                v.getContext().startActivity(intent);
             }
         });
     }

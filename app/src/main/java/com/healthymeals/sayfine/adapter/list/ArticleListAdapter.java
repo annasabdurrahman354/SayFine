@@ -21,6 +21,8 @@ import com.healthymeals.sayfine.activity.ArticleListActivity;
 import com.healthymeals.sayfine.helper.IntentHelper;
 import com.healthymeals.sayfine.model.Article;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.MyViewHolder> {
@@ -43,8 +45,11 @@ public class ArticleListAdapter extends RecyclerView.Adapter<ArticleListAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ArticleListAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy, HH:mm:ss");
+        String strDate = dateFormat.format(mList.get(position).getTimestamp().toDate());
+
         holder.txtArticleTitle.setText(mList.get(position).getTitle());
-        holder.txtArticleDate.setText(mList.get(position).getTimestamp().toDate().toString());
+        holder.txtArticleDate.setText(strDate);
         Glide.with(context).load(mList.get(position).getThumbUrl()).diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imgArticleThumb);
         holder.cardArticle.setOnClickListener(new View.OnClickListener() {
             @Override

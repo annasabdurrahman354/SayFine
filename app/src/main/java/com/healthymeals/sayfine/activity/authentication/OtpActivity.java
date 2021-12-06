@@ -73,7 +73,8 @@ public class OtpActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    if (type == "1"){
+                    if (type.contains("1")){
+                        Toast.makeText(OtpActivity.this, "Selamat datang kembali!", Toast.LENGTH_SHORT).show();
                         Intent loginIntent = new Intent(OtpActivity.this , MainActivity.class);
                         startActivity(loginIntent);
                         finish();

@@ -2,6 +2,7 @@ package com.healthymeals.sayfine.fragment;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -99,7 +101,7 @@ public class HomeFragment extends Fragment {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     if (document.exists()) {
-                        mUser = new User(document.getId(), document.getString("name"), document.getString("profileUrl"), document.getString("phoneNumber"), document.getString("mainAddressId"));
+                        mUser = new User(document.getId(), document.getString("name"), document.getString("profileUrl"), document.getString("phoneNumber"), document.getTimestamp("lastOrder"));
                         Log.d("Success", "DocumentSnapshot data: " + document.getData());
                     } else {
                         Log.d("ERROR", "No such document");
@@ -160,6 +162,7 @@ public class HomeFragment extends Fragment {
 
     private void getPackets() {
         firebaseFirestore.collection("Packets").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         if (error != null){
@@ -169,14 +172,21 @@ public class HomeFragment extends Fragment {
                         }
 
                         for (DocumentChange dc : value.getDocumentChanges()){
+                            int i;
                             Packet packet;
                             packet = new Packet(dc.getDocument().getId(),dc.getDocument().getString("title"), dc.getDocument().getString("description"), dc.getDocument().getString("thumbUrl"), (ArrayList<String>) dc.getDocument().get("menuIdList"));
                             switch (dc.getType()) {
                                 case ADDED:
-                                case MODIFIED:
-                                case REMOVED:
                                     packetList.clear();
                                     packetList.add(packet);
+                                    break;
+                                case MODIFIED:
+                                    i = packetList.indexOf(packetList.stream().filter(temp -> temp.getId().equals(packet.getId())).findFirst().orElse(null));
+                                    packetList.set(i, packet);
+                                    break;
+                                case REMOVED:
+                                    i = packetList.indexOf(packetList.stream().filter(temp -> temp.getId().equals(packet.getId())).findFirst().orElse(null));
+                                    packetList.remove(i);
                                     break;
                             }
                             packetAdapter.notifyDataSetChanged();
@@ -187,6 +197,7 @@ public class HomeFragment extends Fragment {
 
     private void getPromotions() {
         firebaseFirestore.collection("Promotions").addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (error != null){
@@ -196,14 +207,20 @@ public class HomeFragment extends Fragment {
                 }
 
                 for (DocumentChange dc : value.getDocumentChanges()){
+                    int i;
                     Promo promo;
                     promo = new Promo(dc.getDocument().getId(), dc.getDocument().getString("title"), dc.getDocument().getString("description"), dc.getDocument().getString("thumbUrl"), dc.getDocument().getTimestamp("timestamp"));
                     switch (dc.getType()) {
                         case ADDED:
-                        case REMOVED:
-                        case MODIFIED:
-                            promoList.clear();
                             promoList.add(promo);
+                            break;
+                        case REMOVED:
+                            i = promoList.indexOf(promoList.stream().filter(temp -> temp.getId().equals(promo.getId())).findFirst().orElse(null));
+                            promoList.remove(i);
+                            break;
+                        case MODIFIED:
+                            i = promoList.indexOf(promoList.stream().filter(temp -> temp.getId().equals(promo.getId())).findFirst().orElse(null));
+                            promoList.set(i,promo);
                             break;
                     }
                     promoAdapter.notifyDataSetChanged();

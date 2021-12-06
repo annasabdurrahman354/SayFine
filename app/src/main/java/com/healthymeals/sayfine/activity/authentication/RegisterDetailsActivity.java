@@ -132,7 +132,7 @@ public class RegisterDetailsActivity extends AppCompatActivity {
                         userMap.put("name", name);
                         userMap.put("phoneNumber", phoneNumber);
                         userMap.put("profileUrl", uri.toString());
-                        userMap.put("mainAddressId", null);
+                        userMap.put("lastOrder", null);
 
                         firebaseFirestore.collection("Users").document(userId).set(userMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override

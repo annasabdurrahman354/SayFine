@@ -14,6 +14,8 @@ import com.healthymeals.sayfine.R;
 import com.healthymeals.sayfine.activity.BmiHistoryActivity;
 import com.healthymeals.sayfine.model.BodyMassIndex;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class BmiListAdapter extends RecyclerView.Adapter<BmiListAdapter.RecyclerViewHolder> {
@@ -36,9 +38,12 @@ public class BmiListAdapter extends RecyclerView.Adapter<BmiListAdapter.Recycler
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy, HH:mm:ss");
+        String strDate = dateFormat.format(mList.get(position).getTimestamp().toDate());
+
         holder.txtBmiHeight.setText("Tinggi " + mList.get(position).getHeight().toString() + " cm");
         holder.txtBmiWeight.setText("Berat " + mList.get(position).getMass().toString() + " kg");
-        holder.txtBmiDate.setText(mList.get(position).getTimestamp().toDate().toString());
+        holder.txtBmiDate.setText(strDate);
 
         Float height = mList.get(position).getHeight()/100f;
         Float weight = mList.get(position).getMass();

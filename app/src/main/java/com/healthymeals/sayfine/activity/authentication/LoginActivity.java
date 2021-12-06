@@ -79,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNumber = inputCountryCode.getFullNumberWithPlus().toString();
+                String phoneNumber = inputCountryCode.getFullNumberWithPlus().toString().trim();
                 if (!phoneNumber.isEmpty()){
                     CollectionReference cref= firebaseFirestore.collection("Users");
                     Query q1 = cref.whereEqualTo("phoneNumber", phoneNumber);
@@ -88,9 +88,9 @@ public class LoginActivity extends AppCompatActivity {
                         public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                             boolean isExisting = false;
                             for (DocumentSnapshot ds : queryDocumentSnapshots) {
-                                String phoneNumber;
-                                phoneNumber = ds.getString("phoneNumber");
-                                if (phoneNumber.equals(phoneNumber)) {
+                                String temp;
+                                temp = ds.getString("phoneNumber");
+                                if (phoneNumber.equals(temp.trim())) {
                                     isExisting = true;
                                     PhoneAuthOptions options = PhoneAuthOptions.newBuilder(mAuth)
                                             .setPhoneNumber(phoneNumber)

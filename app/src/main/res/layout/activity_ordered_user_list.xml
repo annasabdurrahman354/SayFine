@@ -29,28 +29,17 @@
                 android:layout_height="match_parent">
 
                 <TextView
+                    android:id="@+id/txtActionBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:fontFamily="@font/roboto_medium"
                     android:includeFontPadding="false"
-                    android:text="Pesanan"
+                    android:text="Pesanan Pengguna"
                     android:textAlignment="center"
                     android:textAllCaps="true"
                     android:textColor="@color/SecondaryDark"
                     android:textSize="22sp" />
-
-                <ImageButton
-                    android:id="@+id/btnFavorite"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerInParent="true"
-                    android:background="?selectableItemBackgroundBorderless"
-                    android:tint="@color/SecondaryDark"
-                    android:visibility="gone"
-                    app:srcCompat="@drawable/ic_24_favorite"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>

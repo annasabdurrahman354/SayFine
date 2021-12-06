@@ -4,35 +4,26 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.google.android.material.card.MaterialCardView;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.healthymeals.sayfine.GlideApp;
 import com.healthymeals.sayfine.R;
-import com.healthymeals.sayfine.activity.AdminChatRoomActivity;
-import com.healthymeals.sayfine.activity.ArticleDetailActivity;
-import com.healthymeals.sayfine.activity.ArticleListActivity;
-import com.healthymeals.sayfine.activity.ChatRoomListActivity;
+import com.healthymeals.sayfine.activity.OrderedUserListActivity;
+import com.healthymeals.sayfine.activity.crud.CrudOrderListActivity;
 import com.healthymeals.sayfine.helper.IntentHelper;
-import com.healthymeals.sayfine.model.Article;
-import com.healthymeals.sayfine.model.ChatRoom;
+import com.healthymeals.sayfine.model.User;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -40,13 +31,13 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapter.MyViewHolder> {
-    private ChatRoomListActivity activity;
+public class OrderedUserListAdapter extends RecyclerView.Adapter<OrderedUserListAdapter.MyViewHolder> {
+    private OrderedUserListActivity activity;
     private Context context;
-    private List<ChatRoom> mList;
+    private List<User> mList;
     private FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
 
-    public ChatRoomListAdapter(Context context, ChatRoomListActivity activity, List<ChatRoom> mList){
+    public OrderedUserListAdapter(Context context, OrderedUserListActivity activity, List<User> mList){
         this.context = context;
         this.activity = activity;
         this.mList = mList;
@@ -54,22 +45,22 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
 
     @NonNull
     @Override
-    public ChatRoomListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrderedUserListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(activity).inflate(R.layout.list_chat_room , parent , false);
-        return new ChatRoomListAdapter.MyViewHolder(v);
+        return new OrderedUserListAdapter.MyViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChatRoomListAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull OrderedUserListAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy, HH:mm:ss");
-        String strDate = dateFormat.format(mList.get(position).getLastChat().toDate());
+        String strDate = dateFormat.format(mList.get(position).getLastOrder().toDate());
 
-        holder.txtCustomerName.setText(mList.get(position).getUserName());
+        holder.txtCustomerName.setText(mList.get(position).getName());
         holder.txtLastChat.setText(strDate);
 
         GlideApp.with(context)
                 .asBitmap()
-                .load(firebaseStorage.getReference("profiles/"+mList.get(position).getId()+".jpg"))
+                .load(mList.get(position).getProfileUrl())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(new SimpleTarget<Bitmap>() {
                     @Override
@@ -81,8 +72,8 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
         holder.cardCustomer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IntentHelper.addObjectForKey(mList.get(position), "clickedChatRoom");
-                Intent intent = new Intent (v.getContext(), AdminChatRoomActivity.class);
+                IntentHelper.addObjectForKey(mList.get(position), "clickedOrderedUser");
+                Intent intent = new Intent (v.getContext(), CrudOrderListActivity.class);
                 v.getContext().startActivity(intent);
             }
         });
